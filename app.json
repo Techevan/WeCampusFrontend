@@ -1,0 +1,26 @@
+{
+  "plugins": {
+    "calendar": {
+      "version": "1.1.0",
+      "provider": "wx92c68dae5a8bb046"
+    }
+  },
+  "pages": [
+    "pages/transportation/scheduleDetail/scheduleDetail",
+    "pages/transportation/index/index",
+    "pages/transportation/timeSelector/timeSelector",
+    "pages/transportation/dateSelector/dateSelector",
+    "pages/findCard/sub-index/sub-index",
+    "pages/findCard/iFindCard/iFindCard",
+    "pages/checkIn/check/check",
+    "pages/checkIn/launch/launch",
+    "pages/checkIn/finish/finish",
+    "pages/checkIn/history/history"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  }
+}

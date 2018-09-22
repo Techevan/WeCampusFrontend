@@ -1,0 +1,15 @@
+<view id='top'></view>
+<calendar cell-size='30' header-style='header' start-date='{{start_date}}' end-date='{{end_date}}' binddayClick="dayClick" days-color='{{day_style}}' bindnextMonth="next" bindprevMonth="prev"/>
+<view id='bottom'>
+  <button class='submit' size='mini' hover-class='submit_hover' bindtap='today'>今天</button>
+  <button class='submit' size='mini' hover-class='submit_hover' bindtap='tomorrow'>明天</button>
+  <button class='submit' size='mini' hover-class='submit_hover' style='{{thisFriday}}' bindtap='thisFriday'>本周五</button>
+  <button class='submit' size='mini' hover-class='submit_hover' style='{{thisSaturday}}' bindtap='thisSaturday'>本周六</button>
+  <button class='submit' size='mini' hover-class='submit_hover' bindtap='thisSunday'>本周日</button>
+  <view wx:for="{{next_festival}}" style='display:inline-block'>
+    <button class='submit' size='mini' hover-class='submit_hover'>{{item.name}}</button>
+  </view>
+  <button class='submit' size='mini' hover-class='submit_hover' disabled='true'>更多的快捷方式</button>
+</view>
+
+<view id='introduction'>点选日历或日历下方的快捷按钮选择出行日期喏</view>

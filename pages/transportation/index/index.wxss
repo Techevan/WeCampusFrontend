@@ -1,0 +1,109 @@
+/* pages/transportation/index.wxss */
+@import "../../../lib/style/icomoon.wxss";
+
+page{
+  background-color: #f0f0f0
+}
+
+#header{
+  background-color: white;
+  width: 100%;
+  height: 100pt;
+  padding:8pt 20pt 8pt 8pt;
+}
+
+#title .intro{
+  font-size: 12pt;
+  color: #888888;
+}
+
+#title .dept{
+  font-size: 20pt;
+  color: #353535;
+  font-weight: bold
+}
+
+#position-advise{
+  margin-top: 8rpx;
+  margin-bottom:20rpx;
+  font-size: 10pt;
+  color: #b2b2b2;
+}
+
+.intro-text{
+  color: #888888;
+  font-size: 11pt;
+  line-height: 180%;
+}
+
+.alert{
+  color: #3399ff;
+}
+
+#card-list{
+  width: 96%;
+  margin: auto;
+}
+
+#card{
+  background-color: white;
+  height: 70pt;
+  border-radius: 15rpx;
+  margin-top: 20rpx;
+  padding: 8pt 8pt 8pt 8pt;
+}
+
+#card #left{
+  float: left;
+}
+
+#card #left #left-top{
+  font-size: 17pt;
+}
+
+#card #left #left-bottom{
+  margin-top: 8pt;
+  vertical-align: bottom;
+}
+
+#card #right{
+  float: right
+}
+
+#card #right #right-top{
+  font-size: 11pt;
+  color: #b2b2b2;
+  padding-top: 4pt;
+}
+
+#card #right #right-bottom{
+  color: #b2b2b2;
+}
+
+#card #right #right-bottom{
+  vertical-align: bottom;
+  color: #3399ff;
+  float:right;
+} .number{
+  font-size: 40pt;
+  line-height: 120%
+} .unit{
+  font-size: 12pt;
+}
+
+#label{
+  margin-top: 8pt;
+  margin-bottom: 4pt;
+}
+
+#label text{
+  font-size: 12pt;
+  margin-right: 2pt;
+  margin-left: 2pt;
+}
+
+#label #active{
+  padding:2pt 5pt 3pt 5pt;
+  border-radius: 5pt;
+  background-color: lightblue;
+}

@@ -1,0 +1,42 @@
+/* pages/checkIn/finish/finish.wxss */
+page{
+  background-color: #576b95
+}
+.border1{
+  border: solid lightgray thin;
+  border-radius: 20rpx;
+  background: white;
+  width:90%;
+  height:200rpx;
+  position: absolute;
+  left: 5%;
+  top:20rpx;
+  background: white;
+  z-index: -1
+}
+
+.border2{
+  border: solid lightgray thin;
+  border-radius: 20rpx;
+  background: white;
+  width:90%;
+  height:450rpx;
+  position: absolute;
+  left: 5%;
+  top:250rpx;
+  background: white;
+  z-index: -1
+}
+
+.border3{
+  border: solid lightgray thin;
+  border-radius: 20rpx;
+  background: white;
+  width:90%;
+  height:100rpx;
+  position: absolute;
+  left: 5%;
+  top:730rpx;
+  background: white;
+  z-index: -1
+}

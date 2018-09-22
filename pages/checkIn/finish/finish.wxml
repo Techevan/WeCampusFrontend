@@ -1,0 +1,22 @@
+<!--pages/checkIn/finish/finish.wxml-->
+<view wx:if="{{password=='ERROR'}}">
+  <view class='border1'></view>
+  <view style='color:#576b95;margin-top:50rpx;margin-left:8%;font-weight:700'>您发起的签到无人参与</view>
+   <view style='color:black;margin-top:8pt;margin-buttom:30rpx;margin-left:8%;font-size:12pt'>该签到已为您关闭，报表不再为您导出。</view>
+   
+</view>
+
+<view wx:if="{{password!='ERROR'&&password!=''}}">
+  <view class='border1'></view>
+  <view style='color:#576b95;margin-top:50rpx;margin-left:8%;font-weight:700'>① 在PC端浏览器登录以下网址</view>
+  <view style='color:black;margin-top:8pt;margin-buttom:30rpx;margin-left:8%;font-size:12pt'>https://www.isunnycampus.xyz/</view>
+  <view class='border2'></view>
+  <view style='color:#576b95;margin-top:115rpx;margin-left:8%;font-weight:700'>② 点击按钮扫描页面上二维码</view>
+  <button type='normal' bindtap='scanQRcode' style='width:80%;margin-top:30rpx;margin-left:10%'>去扫码</button>
+  <view style='color:#576b95;margin-top:20rpx;margin-left:8%;font-weight:700'>或输入签到码和密码</view>
+  <view style='color:black;margin-top:20rpx;margin-left:8%;font-size:12pt'>签到码：{{regcode}}</view>
+  <view wx:if='{{password!=0}}' style='color:black;margin-top:20rpx;margin-left:8%;font-size:12pt'>密码：{{password}}</view>
+  <view class='border3'></view>
+  <view wx:if='{{password!=0}}' style='color:black;margin-top:120rpx;margin-left:8%;font-size:14pt;font-weight:700'>{{taskName}}</view>
+
+</view>

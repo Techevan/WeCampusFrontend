@@ -1,0 +1,40 @@
+<!--pages/transportation/timeSelector/timeSelector.wxml-->
+<view id='header'></view>
+<!--
+<view id='date-selector' style='display:inline-block;height:200px;'>
+  <view id='selection' style=''>
+    <view class='unselected'>今天</view>
+    <view class='unselected'>明天</view>
+    <view class='unselected'>其他日期</view>
+  </view>
+</view>
+-->
+
+<view id='bottom'>
+  <button class='{{today}}' size='mini' hover-class='submit_hover' bindtap='today'>今天</button>
+  <button class='{{tomorrow}}' size='mini' hover-class='submit_hover' bindtap='tomorrow'>明天</button>
+  <button class='{{otherDate}}' size='mini' hover-class='submit_hover' bindtap='otherDate'>{{otherDateTitle}}</button>
+</view>
+
+<view style='width:90%;margin:auto'>
+  <picker-view  indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{value}}" bindchange="bindChange">
+    <picker-view-column>
+      <view wx:for="{{hours}}">{{item}}</view>
+    </picker-view-column>
+    <view class='unit'>时</view>
+    <picker-view-column>
+      <view wx:for="{{minutes}}">{{item}}</view>
+    </picker-view-column>
+    <view class='unit'>分</view>
+    <picker-view-column>
+      <view wx:for="{{seconds}}">{{item}}</view>
+    </picker-view-column>
+    <view class='unit'>秒</view>
+  </picker-view>
+</view>
+<view id='confirm'>
+  <button class='confirm_button' bindtap='submit' size='mini' hover-class='confirm_hover' bindtap='today'>确定</button>
+</view>
+
+
+<view id='introduction'>请选择希望的出行时间</view>

@@ -1,0 +1,52 @@
+<!--pages/checkIn/check/check.wxml-->
+<view class='center'>
+  <input type='number' maxlength='4' class='codeInput' placeholder='{{placeholder}}' placeholder-class='placeholder' disabled='{{disabled}}' confirm-hold='false' bindinput='codeInput' value='{{reset}}' ></input>
+</view>
+
+<view style='margin:auto;width:500rpx;text-align:center'>
+  <view style='color:white; font-size:16pt;margin-top:8pt; line-height:180%; font-weight:700'>{{infoToShow}}</view>
+  <view style='color:white;font-size:12pt; margin-top:2pt; line-height:180%; '>{{infoToShowLine2}}</view>
+</view>
+<view style='color:lightgray; text-align:center; margin-top:8pt;font-size:10pt;'>
+  <view wx:if="{{retryShow==true}}">
+   <text bindtap='retry' style='text-decoration:underline'>重试</text>
+  </view>
+  <view wx:if="{{authShow==true}}">
+    <text bindtap='auth' style='text-decoration:underline'>去认证</text>
+  </view>
+  <view wx:if="{{personInfoShow==true}}">
+   <text bindtap='personInfo' style='text-decoration:underline'>补全信息</text>
+  </view>
+</view>
+
+
+
+<view wx:if="{{checkingIn==3}}">
+  <view style='font-size:10pt; color:white;position:absolute; bottom:160rpx; left:125rpx'>* 网络连接失败，请检查网络连接</view>
+  <button type='normal' disabled='true' loading='true' style='width:80%;position:absolute; bottom:50rpx; left:10%'>网络错误</button>
+</view>
+<button type='normal' bindtap='history' style='width:80%;position:absolute; bottom:50rpx; left:10%'>历史签到</button>
+<view wx:if="{{checkingIn==1}}">
+  <button type='normal' bindtap='launchCheck' style='width:80%;position:absolute; bottom:170rpx; left:10%'>发起签到</button>
+</view>
+<view wx:if="{{checkingIn==2}}">
+  <view style='font-size:10pt; color:white;position:absolute; bottom:280rpx; left:10%'>* 您有一个正在进行的签到</view>
+  <button type='normal' bindtap='checkingInPage' style='width:80%;position:absolute; bottom:170rpx; left:10%'>去查看</button>
+</view>
+<view animation="{{animationBackgroundData}}" style='background:white;width:100%;position:absolute;height:0;buttom:30%;border-top-left-radius:30rpx;border-top-right-radius:30rpx;box-shadow:0 -5px 3px gray'>
+  <view style="height:28pt;text-align:center;margin-left:auto;margin-right:auto;width:60%;margin-top:14pt;font-height:150%;margin-bottom:16pt;font-weight:700;color:#576b95;border-bottom:solid #576b95 3rpx">这些朋友也已签到</view>
+  <view style="text-align:center">
+    <image wx:if="{{image0}}" src="{{image0}}" class='image'></image>
+    <image wx:if="{{image1}}" src="{{image1}}" class='image'></image>
+    <image wx:if="{{image2}}" src="{{image2}}" class='image'></image>
+    <image wx:if="{{image3}}" src="{{image3}}" class='image'></image>
+  </view>
+  <view style="text-align:center;margin-top:rpx">
+    <image wx:if="{{image4}}" src="{{image4}}" class='image'></image>
+    <image wx:if="{{image5}}" src="{{image5}}" class='image'></image>
+    <image wx:if="{{image6}}" src="{{image6}}" class='image'></image>
+    <image wx:if="{{image7}}" src="{{image7}}" class='image'></image>
+  </view>
+</view>
+<button animation="{{animationButtonData}}" type='normal' bindtap='cancel' style='width:44%;position:absolute; bottom:-100rpx; left:5%;'>取消签到</button>
+<button animation="{{animationButtonData}}" type='normal' bindtap='retryAnimation' style='width:44%;position:absolute; bottom:-100rpx; right:5%;'>重试</button>

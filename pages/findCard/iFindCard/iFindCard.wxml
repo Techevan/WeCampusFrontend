@@ -1,0 +1,32 @@
+<!--pages/findCard/iFindCard/iFindCard.wxml-->
+<view class='yellowBackground'>
+  <view style='text-align:center;color:white;'>
+    <view style='color:#ee9a00;font-size:8pt'>.</view>
+    <view style='font-size:40pt;weight:700;margin-top:8pt;margin-bottom:4pt'>谢谢你!</view>
+    <image class='iconImage' src='img/card.png'></image>
+    <view class='titleText'>填写以下信息，帮助失主更快找到卡</view>
+  </view>
+</view>
+
+<view style='margin-top:50rpx'>
+  <form bindsubmit='infoSubmit' report-submit='true'>
+    <view style='text-align:center'>
+      <button class='uploadButton' bindtap='uploadButton'>
+        <image wx:if="{{!toUpload}}" class='uploadImage' src='img/upload.png'></image>
+        <view wx:if="{{!toUpload}}" style='color:#ee9a00;font-size:10pt'>上传校园卡</view>
+        <image wx:if="{{toUpload}}" class='uploadImage' src='img/success.png'></image>
+        <view wx:if="{{toUpload}}" style='color:#ee9a00;font-size:10pt'>重新选择</view>
+      </button>
+      <image src='{{toUpload}}' class='imagePreview' bindtap='previewPhoto'></image>
+    </view>
+    <view name='ID' class='inputBlock'>
+      <view class='inputText'>卡主人学号</view>
+      <input class='inputBox'></input>
+    </view>
+    <view name='name' class='inputBlock'>
+      <view class='inputText'>卡主人名字</view>
+      <input class='inputBox'></input>
+    </view>
+  </form>
+  <button class='submit'>提交</button>
+</view>

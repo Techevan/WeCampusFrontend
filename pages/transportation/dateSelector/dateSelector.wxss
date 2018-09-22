@@ -1,0 +1,42 @@
+/* pages/transportation/dateSelector/dateSelector.wxss */
+.header{
+  /*调整日历标题的样式*/
+}
+
+#top{
+  margin: auto;
+  margin-top: 8pt;
+  margin-bottom: 20pt;
+  font-size: 11pt;
+}
+
+#introduction{
+  width:100%;
+  position: absolute;
+  bottom: 10pt;
+  text-align: center;
+  font-size: 11pt;
+  color: gray;
+}
+
+#bottom{
+  width: 95%;
+  margin:auto;
+  margin-top: 18pt;
+  text-align: center;
+}
+
+.submit{
+  background-color: #fefefe;
+  border-color: #fefefe;
+  border-radius: 3pt;
+  margin-left:6rpx;
+  margin-right:6rpx;
+  margin-top: 10rpx;
+}
+
+.submit_hover{
+  background-color: #eeeeee;
+  border-color: #3399ff;
+  color: #3399ff;
+}

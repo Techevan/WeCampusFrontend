@@ -1,0 +1,22 @@
+<!--pages/checkIn/launch/launch.wxml-->
+<view class='inputBlock'>
+  <view wx:if="{{ifLaunch==1}}">
+    <view class='borderNotLaunch'></view>
+    <text style='font-size:60rpx;position:absolute; top:200rpx'>发起签到</text> 
+    <input maxlength='10' class='input' placeholder='请输入签到名（10字内）' placeholder-style='font-size:28rpx' bindinput='taskInput' style='position:absolute; top:320rpx'></input>
+    <button size='mini' type='primary' bindtap='launchButton' style='position:absolute; top:420rpx'>发起签到</button>
+  </view>
+</view>
+<view wx:if="{{ifLaunch==2}}">
+    <view class='taskName' style='margin-top:100rpx'>{{taskName}}</view>
+    <view wx:if="{{checkInCode==0}}" style='text-align: center;font-size:180rpx;color:white;font-weight:bold'>{{checkInCode}}</view>
+    <view wx:if="{{checkInCode!='ERROR'&&checkInCode!=0}}" style='text-align: center;font-size:180rpx;color:#576b95;font-weight:bold'>{{checkInCode}}</view>
+    <view style='text-align: center;font-size:28rpx;color:gray;margin-bottom:8pt'>签到码</view>
+    <view wx:if="{{checkInCode=='ERROR'}}" style='margin:auto;font-size:10pt; color:gray; width:80%;margin-top:50rpx;'>如出现ERROR字样，则可能是网路连接出现了问题，请点击返回后重试</view>
+    <view wx:if="{{checkInCode!='ERROR'&&checkInCode!=0}}" style='margin-top:50rpx;margin:auto;font-size:10pt; color:#576b95; line-height:130%; width:70%'>请将四位签到码告知要参加签到的学生或活动参与者，并及时在签到完成后点选完成签到按钮关闭签到哦！</view>
+    <view wx:if="{{checkInCode!='ERROR'&&checkInCode!=0}}" style='text-align: center;font-size:14pt;color:#576b95;margin-top:20pt;font-weight:bold'>当前已有{{numberOfPeople}}人签到</view>
+    <button wx:if="{{checkInCode!='ERROR'&&checkInCode!=0}}" type='primary' style='width:80%;text-align:center;margin-top:30rpx; position:absolute; bottom:170rpx;left:10%' bindtap='finishLaunch'>完成签到</button>
+    <button type='normal' style='width:80%;text-align:center;margin-top:30rpx;position:absolute; bottom:50rpx;left:10%' bindtap='navigateToLastPage'>返回</button>
+    <view class='borderLaunch'></view>
+
+</view>

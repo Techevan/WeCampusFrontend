@@ -1,0 +1,43 @@
+/* pages/findCard/sub-index/sub-index.wxss */
+page{
+  background-color: #ffffff
+}
+
+.yellowBackground{
+  height:500rpx;
+  width:100%;
+  background: #ee9a00;
+}
+
+.largeButton{
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40rpx;
+  width: 90%;
+  height:250rpx;
+  border: solid #ee9a00 4rpx;
+  border-radius: 50rpx;
+  text-align: left;
+  background-color: white;
+}
+
+.largeButtonHover{
+  background: #eeeeee
+}
+
+.iconImage{
+  margin-top: 50rpx;
+  margin-left: 30rpx;
+  width: 150rpx;
+  height: 150rpx;
+}
+
+.buttonText{
+  display: inline-block;
+  color: #ee9a00;
+  line-height: 250rpx;
+  margin-left: 80rpx;
+  vertical-align: top;
+  font-size: 20pt;
+  font-weight: 700;
+}

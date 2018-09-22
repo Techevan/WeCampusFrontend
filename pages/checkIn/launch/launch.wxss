@@ -1,0 +1,50 @@
+/* pages/checkIn/launch/launch.wxss */
+page{
+  background-color: #576b95
+}
+.input{
+  border: solid lightgray thin;
+  width: 70%;
+  height:60rpx;
+  font-size:28rpx;
+}
+.inputMsg{
+  font-size: 60rpx;
+  color: lightgray;
+  line-height: 150%;
+}
+.inputBlock{
+  margin: auto auto auto 15%;
+}
+.borderNotLaunch{
+  border: solid lightgray thin;
+  border-radius: 20rpx;
+  background: white;
+  width:80%;
+  height:420rpx;
+  position: absolute;
+  left: 10%;
+  top:150rpx;
+  background: white;
+}
+
+.borderLaunch{
+  border: solid lightgray thin;
+  border-radius: 20rpx;
+  background: white;
+  width:80%;
+  height:800rpx;
+  position: absolute;
+  left: 10%;
+  top:50rpx;
+  background: white;
+  z-index: -1
+}
+
+.taskName{
+  font-size: 48rpx;
+  font-weight: bold;
+  line-height: 150%;
+  color:black;
+  text-align: center;
+}

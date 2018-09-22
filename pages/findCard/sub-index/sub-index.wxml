@@ -1,0 +1,22 @@
+<!--pages/findCard/sub-index/sub-index.wxml-->
+
+<!--页面上方黄色底色-->
+<view class='yellowBackground'>
+  <view style='text-align:center;color:white;'>
+    <view style='color:#ee9a00;font-size:8pt'>.</view>
+    <view style='font-size:16pt;weight:700;margin-top:0pt'>校园卡丢了</view>
+    <view style='font-size:36pt;weight:800;margin-top:2pt'>别发愁</view>
+    <view style='font-size:14pt;weight:700;margin-top:6pt'>捡到卡了</view>
+    <view style='font-size:32pt;weight:1000;margin-top:2pt'>做雷锋</view>
+  </view>
+</view>
+
+<button class="largeButton" hover-class="largeButtonHover">
+  <image src='img/sad.png' class='iconImage'></image>
+  <view class='buttonText'>我要找卡</view>
+</button> 
+
+<button class="largeButton" hover-class="largeButtonHover" bindtap='iFindCard'>
+  <image src='img/happy.png' class='iconImage'></image>
+  <view class='buttonText'>捡到卡了</view>
+</button>

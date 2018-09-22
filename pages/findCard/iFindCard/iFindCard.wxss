@@ -1,0 +1,95 @@
+/* pages/findCard/iFindCard/iFindCard.wxss */
+
+.yellowBackground{
+  height:300rpx;
+  width:100%;
+  background: #ee9a00;
+}
+
+.titleText{
+  color: white;
+  font-size: 10pt;
+  text-align: center;
+  line-height: 18pt;
+  font-weight: normal;
+  margin-top: 8pt;
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 4pt
+}
+
+.iconImage{
+  width:50rpx;
+  height:40rpx;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 8pt
+}
+
+.inputBlock{
+  width:90%;
+  margin-top: 8pt;
+  margin-left: 5%;
+  margin-right: 5%;
+  text-align: center;
+  height:75rpx;
+}
+
+.inputText{
+  color: #ee9a00;
+  height:14pt;
+  line-height: 8pt;
+  font-size: 12pt;
+  display: inline-block;
+  vertical-align: center;
+  font-weight: 600
+}
+
+.inputBox{
+  border: solid #ee9a00 3rpx;
+  border-radius: 10rpx;
+  display: inline-block;
+  vertical-align: bottom;
+  margin-left: 10rpx;
+}
+
+.uploadImage{
+  margin-top: 8pt;
+  width: 100rpx;
+  height: 100rpx;
+  vertical-align: middle;
+}
+
+.uploadButton{
+  width:200rpx;
+  height: 200rpx;
+  margin-left: auto;
+  margin-right: 15rpx;
+  border: solid #ee9000 2rpx;
+  border-radius: 10rpx;
+  margin-bottom: 30rpx;
+  display: inline-block
+}
+
+.imagePreview{
+  width:200rpx;
+  height:200rpx;
+  margin-right:auto;
+  margin-left: 15rpx;
+  border: dotted #ee9000 2rpx;
+  border-radius: 10rpx;
+  margin-bottom: 30rpx;
+  display: inline-block
+}
+
+.submit{
+  background-color: #ffffff;
+  width:90%;
+  margin-left: auto;
+  margin-right: auto;
+  color:#ee9000;
+  font-size: 12pt;
+  font-weight: 800;
+  border: solid #ee9000 3rpx;
+  margin-top:12pt;
+}

@@ -1,0 +1,15 @@
+<!--pages/checkIn/history/history.wxml-->
+
+<view wx:if="{{array.length==0}}">
+  <view style='text-align:center;margin-top:50%;color:white;font-weight:700'>您还没有发起过签到</view>
+</view>
+
+<view wx:for="{{array}}">
+  <view style='width:90%;margin-left:auto;margin-right:auto;margin-bottom:5pt;border:solid white;background:white;border-radius:20rpx'>
+    <view style='font-size:10pt;color:gray;margin-left:8pt;height:100%;margin-top:8pt'>{{item.time}}</view>
+    <view style='font-size:14pt;color:#576b95;margin-bottom:8pt;margin-left:8pt;font-weight:700'>{{item.taskName}}</view>
+    <button bindtap="directToFinish" data-number="{{index}}" style='width:90%;margin-left:auto;margin-right:auto;margin-bottom:8pt'>导出签到报表</button>
+  </view>
+</view>
+
+<view wx:if="{{array.length!=0}}" style="font-size:8pt;width:90%;margin:auto;margin-top:16pt;margin-bottom:16pt;color:lightgray;font-weight:300">* 该页面数据为本地缓存，未上传至服务器，清除手机缓存可能会导致消失，请尽快导出签到报表</view>

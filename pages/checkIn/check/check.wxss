@@ -1,0 +1,40 @@
+/* pages/checkIn/check/check.wxss */
+page{
+  background-color: #576b95
+}
+
+.codeInput{
+  color: #576b95;
+  border-width: thin;
+  border-color: black;
+  border-style: solid;
+  border-radius: 30rpx;
+  height: 150rpx;
+  width: 80%;
+  text-align: center;
+  font-size: 120rpx;
+  font-weight: bold;
+  display: inline-block;
+  margin-top:30rpx;
+  background-color: white;
+  box-shadow: 2rpx 2rpx 5rpx #888888;
+}
+
+.center{
+  text-align: center
+}
+
+.placeholder{
+  font-size: 40rpx;
+  font-weight: normal;
+  color:lightgray;
+}
+
+.image{
+  width:100rpx;
+  height:100rpx;
+  border-radius:25rpx;
+  margin-left:8rpx;
+  margin-right:8rpx;
+  box-shadow: 2rpx 2rpx 5rpx #888888;
+}
