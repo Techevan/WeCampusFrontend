@@ -1,1 +1,111 @@
 /* pages/transportation/scheduleDetail/scheduleDetail.wxss */
+page{
+  background-color: #f0f0f0;
+}
+.body{
+  width:95%;
+  padding-top: 8pt;
+  margin: auto;
+  }
+
+.scheduleInfo{
+  background-color: #ffffff;
+  border-radius: 5pt;
+  padding: 5pt;
+  margin-bottom: 8pt;
+}
+
+.mainInfo{
+  margin-top: 8pt;
+  padding: 7pt;
+  background-color: white;
+  border-radius: 5pt;
+}
+
+.infoTitle{
+  font-size: 11pt;
+  line-height: 100%;
+  display: inline-block;
+  margin-right: 5pt;
+  color: gray;
+  min-width: 60pt;
+}
+
+.infoDetail{
+  font-size: 11pt;
+  line-height: 100%;
+  display: inline-block;
+  color: gray;
+}
+
+
+
+.subtitle{
+  font-size: 14pt;
+  font-weight: bold;
+  line-height: 100%;
+  margin-top: 4pt;
+  margin-bottom: 8pt;
+}
+
+.left{
+  width: 48%;
+  display: inline-block;
+  padding: 2pt;
+}
+
+.leftTop{
+  font-size: 40pt;
+}
+
+.leftBottom{
+  font-size: 11pt;
+  padding-top: 2pt;
+  padding-left: 3pt;
+  color: gray;
+  padding-bottom: 3pt
+}
+
+.right{
+  width: 48%;
+  display: inline-block;
+  padding-top: 10pt;
+  padding-bottom: 2pt;
+  padding-left: 2pt;
+  padding-right: 2pt;
+  vertical-align: text-bottom;
+}
+
+.submit{
+  background-color: #fefefe;
+  border-color: #fefefe;
+  border-radius: 3pt;
+  margin-right:6rpx;
+}
+
+.submit_hover{
+  background-color: #eeeeee;
+  border-color: #3399ff;
+  color: #3399ff;
+}
+
+.submit_active{
+  background-color: #3399ff;
+  border-color: #fefefe;
+  border-radius: 3pt;
+  margin-left:6rpx;
+  color:white;
+}
+
+.stop{
+  font-size: 11pt;
+  line-height: 200%;
+  color: gray;
+}
+
+.active{
+  font-size: 11pt;
+  color:#3399ff;
+  font-weight: bold;
+  line-height: 200%
+}

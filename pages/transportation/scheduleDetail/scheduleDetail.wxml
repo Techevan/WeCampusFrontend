@@ -1,2 +1,47 @@
 <!--pages/transportation/scheduleDetail/scheduleDetail.wxml-->
-<text>pages/transportation/scheduleDetail/scheduleDetail.wxml</text>
+
+<view class='body'>
+  <view class='scheduleInfo'>
+    <view class='left'>
+      <view class='leftTop'>17:00</view>
+      <view class='leftBottom'>本站下一班发车时间</view>
+    </view>
+    <view class='right'>
+      <view style='float:right'>
+        <view style='margin-bottom:8pt;'><image src='img/share.png' style='width:15pt;height:15pt;'></image></view>
+        <view><image src='img/feedback.png' style='width:15pt;height:15pt;'></image></view>
+      </view>
+    </view>
+  </view>
+  <button size='mini' bindtap='thisSunday' class='submit' hover-class='submit_hover'>上一班车</button>
+  <button size='mini' bindtap='thisSunday' class='submit' hover-class='submit_hover'>下一班车</button>
+  <button size='mini' bindtap='thisSunday' class='submit_active' hover-class='submit_hover'>设置乘车提醒</button>
+  <view class='mainInfo'>
+    <view class='subtitle'>乘车信息</view>
+    <view class='subblock'>
+      <view class='infoTitle'>出行日期</view>
+      <view class='infoDetail'>2018年9月23日</view>
+    </view>
+    <view class='subblock'>
+      <view class='infoTitle'>出发站点</view>
+      <view class='infoDetail'>嘉定校区</view>
+    </view>
+    <view class='subblock'>
+      <view class='infoTitle'>开往</view>
+      <view class='infoDetail'>四平路校区</view>
+    </view>
+    <view class='subblock'>
+      <view class='infoTitle'>乘车地点</view>
+      <view class='infoDetail'>曹安公路绿苑路</view>
+    </view>
+    <map id="map" longitude="121.212030" latitude="31.286720" scale="18" markers="{{markers}}" style="width: 100%; height: 150px;margin-top:8pt;"></map>
+  </view>
+  <view class='mainInfo' style='margin-bottom:8pt;'>
+    <view class='subtitle'>沿途停靠站点</view>
+    <view class='stop'>○ 安亭地铁站</view>
+    <view class='stop'>○ 曹安公路安谐路</view>
+    <view class='active'>○ 同济大学嘉定校区</view>
+    <view class='stop'>○ 曹杨路中山北二路</view>
+    <view class='stop'>○ 同济大学四平路校区</view>
+  </view>
+</view>
