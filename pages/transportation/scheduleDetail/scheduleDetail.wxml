@@ -3,7 +3,7 @@
 <view class='body'>
   <view class='scheduleInfo'>
     <view class='left'>
-      <view class='leftTop'>17:00</view>
+      <view class='leftTop'>{{scheduleTime}}</view>
       <view class='leftBottom'>本站下一班发车时间</view>
     </view>
     <view class='right'>
@@ -20,15 +20,15 @@
     <view class='subtitle'>乘车信息</view>
     <view class='subblock'>
       <view class='infoTitle'>出行日期</view>
-      <view class='infoDetail'>2018年9月23日</view>
+      <view class='infoDetail'>{{deptDate}}</view>
     </view>
     <view class='subblock'>
       <view class='infoTitle'>出发站点</view>
-      <view class='infoDetail'>嘉定校区</view>
+      <view class='infoDetail'>{{deptStop}}</view>
     </view>
     <view class='subblock'>
       <view class='infoTitle'>开往</view>
-      <view class='infoDetail'>四平路校区</view>
+      <view class='infoDetail'>{{boundFor}}</view>
     </view>
     <view class='subblock'>
       <view class='infoTitle'>乘车地点</view>

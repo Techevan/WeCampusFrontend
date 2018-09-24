@@ -6,8 +6,8 @@
     }
   },
   "pages": [
-    "pages/transportation/scheduleDetail/scheduleDetail",
     "pages/transportation/index/index",
+    "pages/transportation/scheduleDetail/scheduleDetail",
     "pages/transportation/timeSelector/timeSelector",
     "pages/transportation/dateSelector/dateSelector",
     "pages/findCard/sub-index/sub-index",

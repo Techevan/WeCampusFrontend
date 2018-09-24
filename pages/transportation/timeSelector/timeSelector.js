@@ -3,9 +3,15 @@ const hours=[];
 const minutes=[];
 const seconds=[];
 const currentDate=new Date();
-var year=0;
-var month=0;
-var date=0;
+/*
+var year=currentDate.getFullYear();
+var month=currentDate.getMonth()+1;
+var date=currentDate.getDate();
+*/
+var hour=currentDate.getHours();
+var minute=currentDate.getMinutes();
+var second=currentDate.getSeconds();
+
 
 for(let i=0;i<24;i++){
   if(i<10){
@@ -31,6 +37,9 @@ Page({
     hours:hours,
     minutes:minutes,
     seconds:seconds,
+    year: currentDate.getFullYear(),
+    month:currentDate.getMonth() + 1,
+    date:currentDate.getDate(),
     value:[currentDate.getHours(),currentDate.getMinutes(),currentDate.getSeconds()],
     today:"submit_active",
     tomorrow:"submit",
@@ -45,9 +54,12 @@ Page({
     wx.setNavigationBarTitle({
       title: '选择出行时间',
     })
+    /*
     year=options.year;
     month=options.month;
     date=options.day;
+    console.log(year+month+date)
+    
     if(year!=null&&month!=null&&date!=null){
       this.setData({
         otherDateTitle:year+"年"+month+"月"+date+"日",
@@ -56,6 +68,7 @@ Page({
         otherDate: "submit_active",
       })
     }
+    */
   },
 
   /**
@@ -69,7 +82,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    console.log(this.data.year)
   },
 
   /**
@@ -111,13 +124,18 @@ Page({
    * 监听今天按钮
    */
   today:function(){
+/*
     year=currentDate.getFullYear();
     month=currentDate.getMonth()+1;
     date=currentDate.getDate();
+*/
     this.setData({
       today: "submit_active",
       tomorrow: "submit",
       otherDate: "submit",
+      year:currentDate.getFullYear(),
+      month:currentDate.getMonth()+1,
+      date:currentDate.getDate()
     })
   },
   /**
@@ -127,13 +145,14 @@ Page({
     var dateTime = new Date();
     dateTime = dateTime.setDate(dateTime.getDate() + 1);
     dateTime = new Date(dateTime);
-    year=dateTime.getFullYear();
-    month=dateTime.getMonth()+1;
-    date=dateTime.getDate();
+
     this.setData({
       today: "submit",
       tomorrow: "submit_active",
       otherDate: "submit",
+      year: dateTime.getFullYear(),
+      month: dateTime.getMonth() + 1,
+      date: dateTime.getDate()
     })
   },
   /**
@@ -145,8 +164,33 @@ Page({
       tomorrow: "submit",
       otherDate: "submit_active",
     })
-    wx.redirectTo({
+    wx.navigateTo({
       url: '../dateSelector/dateSelector',
     })
+  },
+  /**
+   * 监听确定按钮
+   */
+  confirm:function(){
+    let pages = getCurrentPages();//当前页面
+    let prevPage = pages[pages.length - 2];//上一页面
+    prevPage.setData({//直接给上移页面赋值
+      year:this.data.year,
+      month: this.data.month,
+      date: this.data.date,
+      hour:hour,
+      minute:minute
+    });
+    wx.navigateBack({//返回
+      delta: 1
+    })
+  },
+  /**
+   * 监听滑动动作
+   */
+  bindChange:function(e){
+      hour = e.detail.value[0];
+      minute = e.detail.value[1];
+      second = e.detail.value[2];
   }
 })

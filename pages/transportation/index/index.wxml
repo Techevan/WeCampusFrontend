@@ -1,36 +1,24 @@
 <!--pages/transportation/index.wxml-->
-<view id='header' style='overflow-x: hidden;'>
-  <picker>
-    <view id='title'>
-      <text class='dept'>同济大学嘉定校区</text>
-      <text class='intro'> 出发</text>
-    </view>
-  </picker>
-  <view id='position-advise'>根据GPS位置信息推荐</view>
-</view>
-
-<view id='card-list' style='overflow-x: hidden;'>
-  <view id='label'>
-    <text id='active'>推荐</text>
-    <text>收藏</text>
+<view class='header'>
+  <view class='dept'>
+    <view class='deptStop'>同济大学嘉定校区</view>
+    <view class='deptList'>▼</view>
   </view>
-  <view wx:for="{{info}}">
-    <view id='card'>
-      <view id='left'>
-        <view id='left-top'>{{item.name}}</view>
-        <view id='left-bottom'>
-          <view class='intro-text alert'>发车时间：{{item.dept_time}}</view>
-          <view class='intro-text'>开往{{item.bound_for}}</view>
-        </view>
-      </view>
-      <view id='right'>
-        <view id='right-top'>距离发车还有</view>
-        <view id='right-bottom'>
-          <text class='number'>{{item.time_left}}</text>
-          <text class='unit'>分</text>
-        </view>
-      </view>
-    </view>
+  <view class='deptTime' bindtap='deptTime'>
+    <text>{{deptTime}}出发</text>
+    <text style='font-weight:bold;font-size:10pt'>＞</text>
   </view>
 </view>
 
+<view class='body'>
+  <view wx:for='{{info}}' class='card' bindtap='scheduleDetail' data-list='{{item.list_id}}'>
+    <view class='left'>
+      <view class='title'>{{item.name}}</view>
+      <view class='subtitle'>开往{{item.bound_for}}</view>
+    </view>
+    <view class='right'>
+      <view class='time'>{{item.dept_time}}</view>
+      <view class='right-intro'>下一班发车时间</view>
+    </view>
+  </view>
+</view>

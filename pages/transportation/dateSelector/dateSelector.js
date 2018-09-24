@@ -60,11 +60,23 @@ if (strDay - 6 > 0){
  * 函数：完成数据回传
  */
 function directBack(){
-  wx.redirectTo({
+  /*wx.redirectTo({
     url: '../timeSelector/timeSelector?year='+year_selected+'&month='+month_selected+'&day='+day_selected,
     success: function(res) {},
     fail: function(res) {},
     complete: function(res) {},
+  })*/
+  let pages=getCurrentPages();
+  let prevpage=pages[pages.length-2];
+  prevpage.setData({
+    year:year_selected,
+    month:month_selected,
+    date:day_selected,
+    otherDateTitle:year_selected+'年'+month_selected+'月'+day_selected+'日'
+  })
+  console.log(pages)
+  wx.navigateBack({
+    delta:0
   })
 }
 

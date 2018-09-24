@@ -2,6 +2,15 @@
 /**
  * 初始变量：
  */
+var scheduleTime='';
+var routeName='';
+var deptDate='';
+var deptStop='';
+var boundFor='';
+var positionInfo='';
+var GPSx='';
+var GPSy='';
+var routeStop=['安亭地铁站','曹安公路安谐路','同济大学嘉定校区','曹杨路中山北二路','同济大学四平路校区'];
 
 Page({
 
@@ -23,12 +32,28 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    scheduleTime = options.scheduleTime;
+    routeName = options.routeName;
+    deptDate = options.deptDate;
+    deptStop = options.deptStop;
+    boundFor = options.boundFor;
+    positionInfo = options.positionInfo;
+    GPSx = options.GPSx;
+    GPSy = options.GPSy;
     wx.setNavigationBarTitle({
-      title: '北安跨线',
+      title: routeName,
     })
     wx.setNavigationBarColor({
       frontColor: '#000000',
       backgroundColor: '#f0f0f0',
+    })
+    this.setData({
+      scheduleTime:scheduleTime,
+      routeName:routeName,
+      deptDate:deptDate,
+      deptStop:deptStop,
+      boundFor:boundFor,
+      
     })
   },
 
