@@ -109,3 +109,34 @@ page{
   font-weight: bold;
   line-height: 200%
 }
+
+.alert-active{
+  border: solid #50BFFF 1px;
+  border-radius: 5px;
+  background-color: #ECF8FF;
+  margin-top: 2pt;
+  padding:5pt;
+  color: #50BFFF;
+  font-size: 10pt;
+}
+
+.alert-disabled{
+  border: solid rgb(206, 206, 206) 1px;
+  border-radius: 5px;
+  background-color: #F4F4F5;
+  margin-top: 2pt;
+  padding:5pt;
+  color: #555555;
+  font-size: 10pt;
+}
+
+.alert-warning{
+  border: solid #E9AF56 1px;
+  border-radius: 5px;
+  background-color: #FDF6EC;
+  margin-top: 8pt;
+  padding:5pt;
+  color: #E9AF56;
+  font-size: 10pt;
+  line-height: 150%;
+}

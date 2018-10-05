@@ -1,11 +1,30 @@
 //app.js
 App({
+  onLaunch:function(){
+    wx.login({
+      success:res=>{
+        wx.request({
+          url: this.globalData.URL +'api/code_to_session.php',
+          data:{
+            code: res.code
+          },
+          success:function(e){
+            getApp().globalData.openID=e.data.openid;
+          },
+          fail:function(e){
+            console.log("OPENID获取失败");
+            console.log(e);
+          }
+        })
+      }
+    })
+  },
+  /*
   onLaunch: function () {
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-
     // 登录
     wx.login({
       success: res => {
@@ -86,7 +105,7 @@ App({
       }
     })
   },
-  /*
+  
   userLogin()函数的传参，数据类型为json：
   userInfoData:{
     school:此处为学校名称 例如：tongji（string型变量）
@@ -99,7 +118,7 @@ App({
     phone:自定义获取方式
     qualification:待定
   }
-  */
+  
   userLogin(userInfoData){
     wx.request({
       url: 'https://www.isunnycampus.xyz/WeCampus/userLogin.php',
@@ -117,7 +136,9 @@ App({
       }
     })
   },
+  */
   globalData: {
+    URL:'https://www.we-campus.cn/WeCampus/',
     userInfo: null,
     openID:null,
     school:null,

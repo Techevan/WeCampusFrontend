@@ -15,7 +15,8 @@
     "pages/checkIn/check/check",
     "pages/checkIn/launch/launch",
     "pages/checkIn/finish/finish",
-    "pages/checkIn/history/history"
+    "pages/checkIn/history/history",
+    "pages/transportation/setAlert/setAlert"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -121,7 +121,7 @@ Page({
     console.log(e.currentTarget.dataset.list);
     var URLinfo=info[e.currentTarget.dataset.list];
     wx.navigateTo({
-      url: '../scheduleDetail/scheduleDetail?scheduleTime='+URLinfo.dept_time+'&routeName='+URLinfo.name+'&deptDate='+'2018年9月24日'+'&deptStop='+'同济大学嘉定校区'+'&boundFor='+URLinfo.bound_for,
+      url: '../scheduleDetail/scheduleDetail?scheduleTime=' + URLinfo.dept_time + '&routeName=' + URLinfo.name + '&deptDate=' + year + '年' + month+'月'+day+'日'+'&deptStop='+'同济大学嘉定校区'+'&boundFor='+URLinfo.bound_for,
     })
   }
 })  

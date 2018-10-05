@@ -12,6 +12,32 @@ var GPSx='';
 var GPSy='';
 var routeStop=['安亭地铁站','曹安公路安谐路','同济大学嘉定校区','曹杨路中山北二路','同济大学四平路校区'];
 
+/**
+ * 判断是否是当天和下一天：用于设置乘车提醒
+ */
+
+function alertDisabled(deptDateTemp,that){
+  var curDate = new Date();
+  var nextDate = new Date(curDate.getTime() + 24 * 60 * 60 * 1000);
+  var curDateStr = curDate.getFullYear() + '年' + (curDate.getMonth() + 1)+'月'+curDate.getDate()+'日';
+  var nextDateStr = nextDate.getFullYear() + '年' + (nextDate.getMonth() + 1) + '月' + nextDate.getDate() + '日';
+  if(deptDateTemp==curDateStr||deptDateTemp==nextDateStr){
+    // 允许设置乘车提醒
+    that.setData({
+      alertDisabled:false,
+      alertInfo:"点击设置乘车提醒，开车前微信提醒您",
+      alertClass: 'alert-active'
+    })
+  }else{
+    // 不允许设置乘车提醒
+    that.setData({
+      alertDisabled: true,
+      alertInfo: '无法设置乘车提醒，仅可设置当日及次日车次',
+      alertClass:'alert-disabled'
+    })
+  }
+}
+
 Page({
 
   /**
@@ -26,6 +52,8 @@ Page({
       width: 30,
       height: 30,
     }],
+    warningDisplay:'none', // 是否显示黄色提示框,
+    setAlertButton:'设置乘车提醒'
   },
 
   /**
@@ -40,6 +68,10 @@ Page({
     positionInfo = options.positionInfo;
     GPSx = options.GPSx;
     GPSy = options.GPSy;
+    console.log(deptDate)
+    // 设置乘车提醒功能
+    alertDisabled(deptDate,this);
+
     wx.setNavigationBarTitle({
       title: routeName,
     })
@@ -68,7 +100,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
   },
 
   /**
@@ -104,5 +135,19 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  /**
+   * 设置乘车提醒模板消息
+   */
+  setAlert:function(){
+    console.log('设置乘车提醒')
+    // 在这里补充API信息
+    this.setData({
+      alertDisabled:true,
+      setAlertButton:'已设置乘车提醒',
+      alertInfo: '乘车提醒已设置，将在开车前15分钟左右提醒您',
+      alertClass: 'alert-disabled'
+    })
   }
 })
