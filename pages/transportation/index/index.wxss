@@ -75,6 +75,12 @@ page{
   line-height: 14pt;
 }
 
+.content{
+  font-size: 11pt;
+  color: black;
+  line-height: 18pt;
+}
+
 .time{
   font-size: 25pt;
   color:black
@@ -82,4 +88,16 @@ page{
 
 .right-intro{
   font-size:10pt;
+}
+
+.message-card{
+  border-top: solid 3pt #9999ff
+}
+
+.info-card{
+  border-top: solid 3pt #50BFFF
+}
+
+.copy-card{
+  border-top: solid 3pt #00CED1
 }

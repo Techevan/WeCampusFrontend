@@ -1,9 +1,12 @@
 // pages/transportation/index.js
-var info = [{ name: "汽车城短驳车", dept_time: '16:30', bound_for: "上海汽车城地铁站", list_id: 0 },
-{ name: "昌吉东路短驳车", dept_time: '16:40', bound_for: "昌吉东路地铁站", list_id: 1 },
-{ name: "北安跨线车", dept_time: '17:00', bound_for: "四平路校区", list_id: 2 },
-{ name: "教师班车", dept_time: '16:40', bound_for: "四平路校区", list_id: 3 },
-{ name: "教师班车", dept_time: '16:40', bound_for: "四平路校区", list_id: 4 }
+var info = [{ card:1,name: "汽车城短驳车", dept_time: '16:30', bound_for: "上海汽车城地铁站", list_id: 0 },
+{card:1, name: "昌吉东路短驳车", dept_time: '10:42', bound_for: "昌吉东路地铁站", list_id: 1 },
+{card:1, name: "北安跨线车", dept_time: '17:00', bound_for: "四平路校区", list_id: 2 },
+{card:2, title: "国庆节短驳车时刻调整", content: "这是一条测试信息,这是一条测试信息,这是一条测试信息,这是一条测试信息", list_id: 3},
+{card:1, name: "教师班车", dept_time: '16:40', bound_for: "四平路校区", list_id: 4 },
+{card:1, name: "教师班车", dept_time: '16:40', bound_for: "四平路校区", list_id: 5 },
+{ card: 3, title: "出行助手发福利啦！", content: "点击卡片后打开支付宝即可领取喏！点击卡片后打开支付宝即可领取喏！点击卡片后打开支付宝即可领取喏！点击卡片后打开支付宝即可领取喏！",copyboard:'支付宝红包字符', list_id: 6 },
+{ card: 5, unitID:"adunit-3ec171e0c67d0e68",list_id: 7 }
 ];
 const date=new Date();
 var year=0;
@@ -118,10 +121,19 @@ Page({
    * 点击卡片所绑定的事件
    */
   scheduleDetail:function(e){
-    console.log(e.currentTarget.dataset.list);
-    var URLinfo=info[e.currentTarget.dataset.list];
-    wx.navigateTo({
-      url: '../scheduleDetail/scheduleDetail?scheduleTime=' + URLinfo.dept_time + '&routeName=' + URLinfo.name + '&deptDate=' + year + '年' + month+'月'+day+'日'+'&deptStop='+'同济大学嘉定校区'+'&boundFor='+URLinfo.bound_for,
-    })
+    var URLinfo = info[e.currentTarget.dataset.list];
+    if (URLinfo.card==1)
+    {
+      wx.navigateTo({
+        url: '../scheduleDetail/scheduleDetail?scheduleTime=' + URLinfo.dept_time + '&routeName=' + URLinfo.name + '&deptDate=' + year + '年' + month + '月' + day + '日' + '&deptStop=' + '同济大学嘉定校区' + '&boundFor=' + URLinfo.bound_for,
+      })
+    } else if (URLinfo.card == 2){
+      console.log('INFO')
+    } else if (URLinfo.card == 3){
+      wx.setClipboardData({
+        data: URLinfo.copyboard,
+      })
+    }
+    
   }
 })  

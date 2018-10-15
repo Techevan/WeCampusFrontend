@@ -11,14 +11,31 @@
 </view>
 
 <view class='body'>
-  <view wx:for='{{info}}' class='card' bindtap='scheduleDetail' data-list='{{item.list_id}}'>
-    <view class='left'>
-      <view class='title'>{{item.name}}</view>
-      <view class='subtitle'>开往{{item.bound_for}}</view>
+  <view wx:for='{{info}}' data-list='{{item.list_id}}' bindtap='scheduleDetail'>
+    <!--卡片类型1：出行信息-->
+    <view wx:if='{{item.card==1}}' class='card info-card'>
+      <view class='left'>
+        <view class='title'>{{item.name}}</view>
+        <view class='subtitle'>开往{{item.bound_for}}</view>
+      </view>
+      <view class='right'>
+        <view class='time'>{{item.dept_time}}</view>
+        <view class='right-intro'>下一班发车时间</view>
+      </view>
     </view>
-    <view class='right'>
-      <view class='time'>{{item.dept_time}}</view>
-      <view class='right-intro'>下一班发车时间</view>
+    <!--卡片类型2：消息通知-->
+    <view wx:if='{{item.card==2}}' class='card message-card'>
+      <view class='title' style='color:#9999ff'>{{item.title}}</view>
+      <view class='content'>{{item.content}}</view>
+    </view>
+    <!--卡片类型3：复制到剪贴板-->
+    <view wx:if='{{item.card==3}}' class='card copy-card'>
+      <view class='title' style='color:#00CED1'>{{item.title}}</view>
+      <view class='content'>{{item.content}}</view>
+    </view>
+    <!--卡片类型4：广告-->
+    <view wx:if='{{item.card==4}}' class='card'>
+      <ad unit-id="{{item.unitID}}"></ad>
     </view>
   </view>
 </view>
