@@ -2,16 +2,22 @@
 /**
  * 初始变量：
  */
+var app=getApp();
 var scheduleTime='';
 var routeName='';
+var routeID='';
 var deptDate='';
 var deptStop='';
+var deptStopID='';
+var patternID='';
 var boundFor='';
 var positionInfo='';
 var GPSx='';
 var GPSy='';
 var routeStop=['安亭地铁站','曹安公路安谐路','同济大学嘉定校区','曹杨路中山北二路','同济大学四平路校区'];
-
+var warning='';
+// 存放今天当前线路的所有车次
+var todaySchedule=new Array();
 
 /**
  * 判断乘车提醒是否已经设置
@@ -19,9 +25,6 @@ var routeStop=['安亭地铁站','曹安公路安谐路','同济大学嘉定校�
 function alertStorage(deptDateTemp, scheduleTimeTemp, routeNameTemp, boundForTemp, curDateStrTemp, nextDateStrTemp) {
   var storageTemp = wx.getStorageSync('alert');
   if(storageTemp==''){
-    var newStorage=new Array();
-    newStorage.push({ deptDate: deptDateTemp, scheduleTime: scheduleTimeTemp, routeName: routeNameTemp, boundFor: boundForTemp });
-    wx.setStorageSync('alert', newStorage);
     return true;
   }
   for(let i=0,j=0,length=storageTemp.length;j<length;j++){
@@ -34,7 +37,6 @@ function alertStorage(deptDateTemp, scheduleTimeTemp, routeNameTemp, boundForTem
       i++;
     }
   }
-  storageTemp.push({deptDate: deptDateTemp, scheduleTime: scheduleTimeTemp, routeName: routeNameTemp, boundFor: boundForTemp});
   wx.setStorageSync('alert', storageTemp);
   return true;
 }
@@ -51,34 +53,32 @@ function alertDisabled(deptDateTemp, scheduleTimeTemp, routeNameTemp,boundForTem
   var strTemp = scheduleTimeTemp.split(':');
   var afterCurrentTime = (curDate.getHours() < parseInt(strTemp[0])) || ((curDate.getHours() == parseInt(strTemp[0])) && (curDate.getMinutes() < parseInt(strTemp[1])));
 
-  if ((deptDateTemp == curDateStr || deptDateTemp == nextDateStr) && afterCurrentTime){
-    // 允许设置乘车提醒
-    that.setData({
-      alertDisabled:false,
-      alertInfo:"点击设置乘车提醒，开车前微信提醒您",
-      alertClass: 'alert-active'
-    })
-  }else{
+  if (!((deptDateTemp == curDateStr && afterCurrentTime) || deptDateTemp == nextDateStr)){
     // 不允许设置乘车提醒
     that.setData({
       alertDisabled: true,
-      alertInfo: '无法设置乘车提醒，仅可设置当日及次日车次',
-      alertClass:'alert-disabled'
-    })
-    return;
-  }
-  var storage = alertStorage(deptDateTemp, scheduleTimeTemp, routeNameTemp, boundForTemp, curDateStr, nextDateStr);
-  if (storage == false) {
-    // 已经设置乘车提醒
-    that.setData({
-      alertDisabled: true,
-      alertInfo: "已设置乘车提醒，开车前微信提醒您",
+      alertInfo: '无法设置乘车提醒，仅可设置当日之后车次及次日车次',
       alertClass: 'alert-disabled'
     })
     return;
+  }else{
+    var storage = alertStorage(deptDateTemp, scheduleTimeTemp, routeNameTemp, boundForTemp, curDateStr, nextDateStr);
+    if (storage == false) {
+      // 已经设置乘车提醒
+      that.setData({
+        alertDisabled: true,
+        alertInfo: "已设置乘车提醒，开车前微信提醒您",
+        alertClass: 'alert-disabled'
+      })
+      return;
+    }
+    // 允许设置乘车提醒
+    that.setData({
+      alertDisabled: false,
+      alertInfo: "点击设置乘车提醒，开车前微信提醒您",
+      alertClass: 'alert-active'
+    })
   }
-
-
 }
 
 
@@ -97,7 +97,7 @@ Page({
       width: 30,
       height: 30,
     }],
-    warningDisplay:'none', // 是否显示黄色提示框,
+    warningDisplay:true, // 是否显示黄色提示框,
     setAlertButton:'设置乘车提醒'
   },
 
@@ -109,10 +109,40 @@ Page({
     routeName = options.routeName;
     deptDate = options.deptDate;
     deptStop = options.deptStop;
+    deptStopID = options.deptStopID;
     boundFor = options.boundFor;
-    positionInfo = options.positionInfo;
-    GPSx = options.GPSx;
-    GPSy = options.GPSy;
+    routeID = options.routeID;
+    deptStopID = options.deptStopID;
+    patternID=options.patternID;
+    // 从服务器二次获取详细信息
+    var thatT=this;
+    wx.request({
+      url: 'https://dsn.apizza.net/mock/e4a3024c95b0abf39daaaaaa68af4970/getInfoDetail',
+      method:'GET',
+      data:{
+        station_id:deptStopID,
+        route_id:routeID,
+        pattern_id:patternID
+      },
+      success:function(res){
+        GPSx=res.data.route_info.GPSx;
+        GPSy = res.data.route_info.GPSy;
+        positionInfo = res.data.route_info.location;
+        warning = res.data.route_info.warning;
+        todaySchedule=res.data.schedule;
+        var warningDisplay=(warning=='')?false:true;
+        thatT.setData({
+          GPSx:GPSx,
+          GPSy:GPSy,
+          positionInfo:positionInfo,
+          warningDisplay:warningDisplay,
+          warning:warning,
+        })
+      }
+    })
+
+
+
     console.log(deptDate)
     // 设置乘车提醒功能
     alertDisabled(deptDate,scheduleTime,routeName,boundFor,this);
@@ -131,6 +161,7 @@ Page({
       deptStop:deptStop,
       boundFor:boundFor,
     })
+    
   },
 
   /**
@@ -184,15 +215,94 @@ Page({
   /**
    * 设置乘车提醒模板消息
    */
-  setAlert:function(){
-    console.log('设置乘车提醒')
-    // 在这里补充API信息
+  setAlert:function(e){
+    var storageTemp=wx.getStorageSync('alert');
+    console.log(storageTemp)
+    if(!storageTemp){
+      var newStorage = new Array();
+      newStorage.push({ deptDate: deptDate, scheduleTime: scheduleTime, routeName: routeName, boundFor: boundFor });
+      wx.setStorageSync('alert', newStorage);
+    }else{
+      storageTemp.push({ deptDate: deptDate, scheduleTime: scheduleTime, routeName: routeName, boundFor: boundFor });
+      wx.setStorageSync('alert', storageTemp);
+    }
 
-    this.setData({
-      alertDisabled:true,
-      setAlertButton:'已设置乘车提醒',
-      alertInfo: '乘车提醒已设置，将在开车前15分钟左右提醒您',
-      alertClass: 'alert-disabled'
+    var thatT=this;
+    wx.request({
+      url: app.globalData.domain+'message',
+      method:'POST',
+      data:{
+        open_id:app.globalData.openID,
+        form_id:e.detail.formID
+      },
+      success:function(res){
+        if(res.data.status=='success'){
+          console.log(res)
+          thatT.setData({
+            alertDisabled: true,
+            setAlertButton: '已设置乘车提醒',
+            alertInfo: '乘车提醒已设置，将在开车前15分钟左右提醒您',
+            alertClass: 'alert-disabled'
+          })
+        }
+      }
+    })    
+  },
+
+  /**
+   * 反馈按钮监控
+   */
+  feedback:function(){
+    wx.navigateTo({
+      url: '../feedback/feedback?name=' + routeName + '&date=' + deptDate +'&time=' + scheduleTime+'&boundFor='+boundFor+'&stop='+deptStop,
     })
+  },
+
+  /**
+   * 分享按钮监控
+   */
+  share:function(){
+    wx.showToast({
+      title: '分享功能即将上线，请先截图分享，谢谢',
+      icon:'none'
+    })
+  },
+
+  /**
+   * 监控上一班车按钮
+   */
+  lastBus:function(){
+    var index=todaySchedule.indexOf(scheduleTime);
+    if(index<=0){
+      wx.showToast({
+        title: '已经是当日第一班车',
+        icon:'none'
+      })
+      return;
+    }else{
+      scheduleTime=todaySchedule[index - 1];
+      this.setData({
+        scheduleTime:scheduleTime
+      })
+    }
+  },
+
+  /**
+   * 监控下一班车按钮
+   */
+  nextBus:function(){
+    var index=todaySchedule.indexOf(scheduleTime);
+    if(index==todaySchedule.length-1){
+      wx.showToast({
+        title: '已经是当日末班车',
+        icon:'none'
+      })
+      return;
+    }else{
+      scheduleTime=todaySchedule[index+1];
+      this.setData({
+        scheduleTime:scheduleTime
+      })
+    }
   }
 })

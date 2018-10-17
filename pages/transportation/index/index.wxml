@@ -1,9 +1,9 @@
 <!--pages/transportation/index.wxml-->
 <view class='header'>
-  <view class='dept'>
-    <view class='deptStop'>同济大学嘉定校区</view>
+  <picker class='dept' bindchange='stationList' value='{{stationList}}' range='{{stationList}}' mode='selector' range-key='label' >
+    <view class='deptStop'>{{stationDisplay}}</view>
     <view class='deptList'>▼</view>
-  </view>
+  </picker>
   <view class='deptTime' bindtap='deptTime'>
     <text>{{deptTime}}出发</text>
     <text style='font-weight:bold;font-size:10pt'>＞</text>

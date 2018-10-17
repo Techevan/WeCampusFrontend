@@ -91,13 +91,13 @@ page{
 }
 
 .message-card{
-  border-top: solid 3pt #9999ff
+  border-left: solid 3pt #9999ff
 }
 
 .info-card{
-  border-top: solid 3pt #50BFFF
+  border-left: solid 3pt #50BFFF
 }
 
 .copy-card{
-  border-top: solid 3pt #00CED1
+  border-left: solid 3pt #00CED1
 }

@@ -1,0 +1,33 @@
+<!--pages/transportation/feedback/feedback.wxml-->
+<view class='body'>
+  <view class='mainInfo'>
+    <view class='subblock'>
+      <view class='infoTitle'>乘坐车种</view>
+      <view class='infoDetail'>{{info.name}}</view>
+    </view>
+    <view class='subblock'>
+      <view class='infoTitle'>发车日期</view>
+      <view class='infoDetail'>{{info.date}}</view>
+    </view>
+    <view class='subblock'>
+      <view class='infoTitle'>发车时间</view>
+      <view class='infoDetail'>{{info.time}}</view>
+    </view>
+    <view class='subblock'>
+      <view class='infoTitle'>乘车站点</view>
+      <view class='infoDetail'>{{info.stop}}</view>
+    </view>
+    <view class='subblock'>
+      <view class='infoTitle'>开往地点</view>
+      <view class='infoDetail'>{{info.boundFor}}</view>
+    </view>
+  </view>
+  <form report-submit='true' bindsubmit='formSubmit'>
+    <textarea name='feedback' class='inputBlock-blur' placeholder='查到的发车时间不准？座位不够？司机态度不好？在这里告诉我们！' show-confirm-bar='false'></textarea>
+    <input name='email' class='emailBlock-blur' placeholder='留下邮箱让我们联系你~'></input>
+    <view style='text-align:center'>
+      <button size='mini' class='submit_active' hover-class='submit_hover' disabled='{{alertDisabled}}' style='width:100px;margin-top:12pt;margin-right:4pt;' form-type='submit'>提交</button>
+      <button type='normal' size='mini' bindtap='navigateBack' style='width:100px;margin-top:12pt;margin-left:4pt;'>返回</button>
+    </view>
+  </form>
+</view>

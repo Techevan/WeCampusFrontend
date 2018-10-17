@@ -1,0 +1,103 @@
+/* pages/transportation/feedback/feedback.wxss */
+page{
+  background-color: #f0f0f0
+}
+
+.body{
+  width:95%;
+  margin: auto;
+}
+
+.mainInfo{
+  margin-top: 8pt;
+  padding: 7pt;
+  background-color: white;
+  border-radius: 5pt;
+  margin-bottom: 18pt;
+}
+
+.infoTitle{
+  font-size: 11pt;
+  line-height: 100%;
+  display: inline-block;
+  margin-right: 5pt;
+  color: black;
+  min-width: 60pt;
+}
+
+.infoDetail{
+  font-size: 11pt;
+  line-height: 100%;
+  display: inline-block;
+  color: black;
+}
+
+.subtitle{
+  font-size: 14pt;
+  font-weight: bold;
+  line-height: 100%;
+  margin-top: 4pt;
+  margin-bottom: 8pt;
+}
+
+.inputBlock-active{
+  background-color: white;
+  border: solid 1px #50BFFF;
+  border-radius: 5pt;
+  font-size: 11pt;
+  color: black;
+  padding: 5pt;
+  width: 95%;
+  margin:auto;
+  margin-top: 8pt;
+}
+
+.inputBlock-blur{
+  background-color: white;
+  border: solid 1px lightgray;
+  border-radius: 5pt;
+  font-size: 11pt;
+  color: black;
+  padding: 5pt;
+  width: 96%;
+  margin:auto;
+  margin-top: 8pt;
+}
+
+.emailBlock-active{
+  background-color: white;
+  border: solid 1px #50BFFF;
+  border-radius: 5pt;
+  font-size: 11pt;
+  color: black;
+  padding: 5pt;
+  width: 95%;
+  margin:auto;
+  margin-top: 8pt;
+}
+
+.emailBlock-blur{
+  background-color: white;
+  border: solid 1px lightgray;
+  border-radius: 5pt;
+  font-size: 11pt;
+  color: black;
+  padding: 5pt;
+  width: 96%;
+  margin:auto;
+  margin-top: 8pt;
+}
+
+.submit_hover{
+  background-color: #eeeeee;
+  border-color: #3399ff;
+  color: #3399ff;
+}
+
+.submit_active{
+  background-color: #3399ff;
+  border-color: #fefefe;
+  border-radius: 3pt;
+  margin-left:6rpx;
+  color:white;
+}
