@@ -98,7 +98,7 @@ Page({
       height: 30,
     }],
     warningDisplay:true, // 是否显示黄色提示框,
-    setAlertButton:'设置乘车提醒'
+    setAlertButton:'设置乘车提醒',
   },
 
   /**
@@ -117,7 +117,7 @@ Page({
     // 从服务器二次获取详细信息
     var thatT=this;
     wx.request({
-      url: 'https://dsn.apizza.net/mock/e4a3024c95b0abf39daaaaaa68af4970/getInfoDetail',
+      url: app.globalData.domain +'transportation/api/get_route_detail.php',
       method:'GET',
       data:{
         station_id:deptStopID,
@@ -125,12 +125,14 @@ Page({
         pattern_id:patternID
       },
       success:function(res){
-        GPSx=res.data.route_info.GPSx;
-        GPSy = res.data.route_info.GPSy;
-        positionInfo = res.data.route_info.location;
-        warning = res.data.route_info.warning;
+        console.log(res)
+        GPSx = parseFloat(res.data.route_info[0].GPSx);
+        GPSy = parseFloat(res.data.route_info[0].GPSy);
+        console.log(GPSx)
+        positionInfo = res.data.route_info[0].location;
+        warning = res.data.route_info[0].warning;
         todaySchedule=res.data.schedule;
-        var warningDisplay=(warning=='')?false:true;
+        var warningDisplay=(warning=='');
         thatT.setData({
           GPSx:GPSx,
           GPSy:GPSy,
@@ -138,6 +140,7 @@ Page({
           warningDisplay:warningDisplay,
           warning:warning,
         })
+        console.log(thatT.data.GPSx)
       }
     })
 

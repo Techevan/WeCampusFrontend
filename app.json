@@ -16,8 +16,9 @@
     "pages/checkIn/launch/launch",
     "pages/checkIn/finish/finish",
     "pages/checkIn/history/history",
-    "pages/transportation/setAlert/setAlert"
-  ],
+    "pages/transportation/setAlert/setAlert",
+    "pages/transportation/feedback/feedback"
+    ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",

@@ -125,7 +125,7 @@ Page({
     console.log(res.detail.formId);
     console.log(app.globalData.openID);
     wx.request({
-      url: app.globalData.domain+'feedback',
+      url: app.globalData.domain +'transportation/api/post_feedback_info.php',
       method:'POST',
       data:{
         route_name:this.data.name,
@@ -139,7 +139,8 @@ Page({
         email: res.detail.value.email
       },
       success:function(res){
-        if (res.data.status == 'success'){
+        console.log(res)
+        if (res.data.success=true){
           wx.showToast({
             icon: 'none',
             title: '您已成功提交,谢谢反馈',

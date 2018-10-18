@@ -139,6 +139,7 @@ App({
   */
   globalData: {
     URL:'https://www.we-campus.cn/WeCampus/',
+    domain:'https://www.we-campus.cn/WeCampus/',
     userInfo: null,
     openID:null,
     school:null,
@@ -147,6 +148,10 @@ App({
       name:null,
       phone:null,
       studentID:null
+    },
+    requestHeader:{
+      school_id:1
     }
+
   }
 })

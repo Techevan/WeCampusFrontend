@@ -37,6 +37,7 @@ page{
   width: 95%;
   margin: auto;
   padding-top: 5pt;
+  padding-bottom:2pt;
 }
 
 .card{
