@@ -38,4 +38,10 @@
       <ad unit-id="{{item.unitID}}"></ad>
     </view>
   </view>
+  <view wx:if="{{noInfo!=''}}">
+    <view style='text-align:center;margin-bottom:8pt;margin-top:24pt;'>
+      <image src='img/cry.png' style='width:50pt;height:50pt;'></image>
+    </view>
+    <view style='font-size:10pt;margin-top:8pt;color:grey;text-align:center'>{{noInfo}}</view>
+  </view>  
 </view>

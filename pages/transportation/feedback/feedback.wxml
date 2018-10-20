@@ -22,8 +22,9 @@
       <view class='infoDetail'>{{info.boundFor}}</view>
     </view>
   </view>
+  <view style='font-size:10pt;color:grey;text-align:left;width:98%;margin:auto'>如果您在乘坐本次班车遇到问题，或对微校出行助手有更多建议和看法，请在下方填写，谢谢。</view>
   <form report-submit='true' bindsubmit='formSubmit'>
-    <textarea name='feedback' class='inputBlock-blur' placeholder='查到的发车时间不准？座位不够？司机态度不好？在这里告诉我们！' show-confirm-bar='false'></textarea>
+    <textarea name='feedback' class='inputBlock-blur' placeholder='时间不准？座位不够？司机态度不好？告诉我们！' show-confirm-bar='false'></textarea>
     <input name='email' class='emailBlock-blur' placeholder='留下邮箱让我们联系你~'></input>
     <view style='text-align:center'>
       <button size='mini' class='submit_active' hover-class='submit_hover' disabled='{{alertDisabled}}' style='width:100px;margin-top:12pt;margin-right:4pt;' form-type='submit'>提交</button>

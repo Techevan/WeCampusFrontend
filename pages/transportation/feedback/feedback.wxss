@@ -13,7 +13,7 @@ page{
   padding: 7pt;
   background-color: white;
   border-radius: 5pt;
-  margin-bottom: 18pt;
+  margin-bottom: 12pt;
 }
 
 .infoTitle{
@@ -29,7 +29,7 @@ page{
   font-size: 11pt;
   line-height: 100%;
   display: inline-block;
-  color: black;
+  color: gray;
 }
 
 .subtitle{

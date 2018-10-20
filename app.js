@@ -150,7 +150,8 @@ App({
       studentID:null
     },
     requestHeader:{
-      school_id:1
+      "school_id":1,
+      "Content-Type":"application/x-www-form-urlencoded"
     }
 
   }

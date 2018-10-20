@@ -20,7 +20,6 @@ var minute=date.getMinutes();
  * 处理info这个JSON数组的函数
  */
 function infoUpdate(that,infoTemp){
-  console.log("INFO UPDATE")
   for (let i = 0; i < message.length; i++) {
     if(message[i].position<infoTemp.length){
       infoTemp.splice(message[i].position, 0, message[i]);
@@ -39,7 +38,11 @@ function infoUpdate(that,infoTemp){
     infoTemp[i].bound_for=stationList[temp].label;
   }
   info=infoTemp;
-  that.setData({ info: infoTemp });
+  var noInfo='';
+  if(info.length==0){
+    noInfo='当天没有车了，换个时间试试看吧'
+  }
+  that.setData({ info: infoTemp, noInfo:noInfo});
   wx.hideLoading();
 }
 
@@ -51,14 +54,6 @@ function requestMessage(thatT){
     header:app.globalData.requestHeader,
     success:function(res){
       message=res.data;
-      console.log("MESSAGE BELOW")
-      console.log(message)
-      if(info==undefined){
-        console.log("UNDEFINED INFO")
-      }else{
-        //console.log("FROM MESSAGE")
-        //infoUpdate(thatT, info);
-      }
     }
   })
 }
@@ -127,13 +122,7 @@ function requestInfo(that,deptLocation,year,month,day,hour,minute){
     },
     success:function(res){
       info=res.data;
-      // 当获取到info后
-      if(message== undefined){
-        console.log("UNDEFINED MESSAGE")
-      }else{
-        console.log("FROM INFO")
-        infoUpdate(thatT, info);
-      }
+      infoUpdate(thatT, info);
     }
   })
 }
@@ -151,7 +140,8 @@ Page({
     date:date.getDate(),
     hour:date.getHours(),
     minute:date.getMinutes(),
-    stationDisplay:'加载中……'
+    stationDisplay:'加载中……',
+    noInfo:''
   },
 
   /**
@@ -219,7 +209,6 @@ Page({
     })
     // 计数器用于控制第一次不请求onShow中获取卡片的函数
     requestInfo(this, deptStationID, year, month, day, hour, minute);
-    console.log('ONSHOW中函数请求')    
   },
 
   /**
@@ -275,13 +264,13 @@ Page({
     {
       var tempStr = '../scheduleDetail/scheduleDetail?';
       tempStr += ('scheduleTime=' + URLinfo.dept_time);
-      tempStr += ('&routeName=' + URLinfo.name);
+      tempStr += ('&routeName=' + URLinfo.name);//==
       tempStr += ('&deptDate=' + year + '年' + month + '月' + day + '日');
-      tempStr += ('&routeID=' + URLinfo.routeID);
+      tempStr += ('&routeID=' + URLinfo.routeID);//==
       tempStr += ('&boundFor=' + URLinfo.bound_for);
       tempStr += ('&deptStop=' + deptStationName);
-      tempStr += ('&deptStopID=' + deptStationID);
-      tempStr += ('&patternID=' + URLinfo.pattern_id);
+      tempStr += ('&deptStopID=' + deptStationID);//==
+      tempStr += ('&patternID=' + URLinfo.pattern_id);//==
 
 
       wx.navigateTo({

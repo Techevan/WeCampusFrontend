@@ -84,7 +84,6 @@ function alertDisabled(deptDateTemp, scheduleTimeTemp, routeNameTemp,boundForTem
 
 
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -119,16 +118,15 @@ Page({
     wx.request({
       url: app.globalData.domain +'transportation/api/get_route_detail.php',
       method:'GET',
+      header:app.globalData.requestHeader,
       data:{
         station_id:deptStopID,
         route_id:routeID,
         pattern_id:patternID
       },
       success:function(res){
-        console.log(res)
         GPSx = parseFloat(res.data.route_info[0].GPSx);
         GPSy = parseFloat(res.data.route_info[0].GPSy);
-        console.log(GPSx)
         positionInfo = res.data.route_info[0].location;
         warning = res.data.route_info[0].warning;
         todaySchedule=res.data.schedule;
@@ -140,13 +138,9 @@ Page({
           warningDisplay:warningDisplay,
           warning:warning,
         })
-        console.log(thatT.data.GPSx)
       }
     })
 
-
-
-    console.log(deptDate)
     // 设置乘车提醒功能
     alertDisabled(deptDate,scheduleTime,routeName,boundFor,this);
 
@@ -219,8 +213,20 @@ Page({
    * 设置乘车提醒模板消息
    */
   setAlert:function(e){
+    var strTemp = deptDate.split('年');
+    var tempY=strTemp[0];
+    var strTemp2=strTemp[1].split('月');
+    var tempM=strTemp2[0];
+    var tempD=(strTemp2[1].split('日'))[0];
+    if(tempM.length!=2){
+      tempM='0'+tempM;
+    }
+    if(tempD.length!=2){
+      tempD='0'+tempD;
+    }
+    var tempDeptTime=tempY+'-'+tempM+'-'+tempD+' '+scheduleTime;
+
     var storageTemp=wx.getStorageSync('alert');
-    console.log(storageTemp)
     if(!storageTemp){
       var newStorage = new Array();
       newStorage.push({ deptDate: deptDate, scheduleTime: scheduleTime, routeName: routeName, boundFor: boundFor });
@@ -232,15 +238,23 @@ Page({
 
     var thatT=this;
     wx.request({
-      url: app.globalData.domain+'message',
+      url: app.globalData.domain +'transportation/api/send_template_message.php',
+      header: app.globalData.requestHeader,
       method:'POST',
       data:{
         open_id:app.globalData.openID,
-        form_id:e.detail.formID
+        form_id:e.detail.formId,
+        time:tempDeptTime,
+        keyword_1:routeName,
+        keyword_2:deptStop,
+        keyword_3:boundFor,
+        keyword_5:scheduleTime,
+        station_id: deptStopID,
+        route_id: routeID,
+        pattern_id: patternID
       },
       success:function(res){
-        if(res.data.status=='success'){
-          console.log(res)
+        if(res.data.success==true){
           thatT.setData({
             alertDisabled: true,
             setAlertButton: '已设置乘车提醒',

@@ -121,25 +121,23 @@ Page({
    * 提交表单绑定事件
    */
   formSubmit:function(res){
-    console.log(res.detail.value);
-    console.log(res.detail.formId);
-    console.log(app.globalData.openID);
+    var thatT=this;
     wx.request({
       url: app.globalData.domain +'transportation/api/post_feedback_info.php',
       method:'POST',
+      header: app.globalData.requestHeader,
       data:{
-        route_name:this.data.name,
-        time:this.data.time+':00',
-        cur_date:this.data.date,
-        end_station_name:this.data.boundFor,
-        stop_name:this.data.stop,
+        route_name:thatT.data.info.name,
+        time:thatT.data.info.time+':00',
+        cur_date:thatT.data.info.date,
+        end_station_name:thatT.data.info.boundFor,
+        stop_name:thatT.data.info.stop,
         open_id:app.globalData.openID,
         form_id: res.detail.formId,
         feedback: res.detail.value.feedback,
         email: res.detail.value.email
       },
       success:function(res){
-        console.log(res)
         if (res.data.success=true){
           wx.showToast({
             icon: 'none',

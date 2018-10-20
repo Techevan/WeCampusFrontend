@@ -74,13 +74,10 @@ function directBack(){
     date:day_selected,
     otherDateTitle:year_selected+'年'+month_selected+'月'+day_selected+'日'
   })
-  console.log(pages)
   wx.navigateBack({
     delta:0
   })
 }
-
-
 
 Page({
 
