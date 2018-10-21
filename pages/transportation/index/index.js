@@ -251,7 +251,7 @@ Page({
    */
   deptTime:function(){
     wx.navigateTo({
-      url: '../timeSelector/timeSelector',
+      url: '../timeSelector/timeSelector?year='+year+'&month='+month+'&day='+day,
     })
   },
 

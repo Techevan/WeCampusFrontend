@@ -37,9 +37,6 @@ Page({
     hours:hours,
     minutes:minutes,
     seconds:seconds,
-    year: currentDate.getFullYear(),
-    month:currentDate.getMonth() + 1,
-    date:currentDate.getDate(),
     value:[currentDate.getHours(),currentDate.getMinutes(),currentDate.getSeconds()],
     today:"submit_active",
     tomorrow:"submit",
@@ -51,6 +48,36 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var curDate = new Date();
+    var nextDate = new Date(curDate.getTime() + 24 * 60 * 60 * 1000);
+    var today_class='submit';
+    var tomorrow_class='submit';
+    var otherday_class='submit';
+    var otherday_title='其他日期';
+
+    var yearT = parseInt(options.year);
+    var monthT = parseInt(options.month);
+    var dayT=parseInt(options.day);
+
+    if (yearT==curDate.getFullYear()&&monthT==(curDate.getMonth()+1)&&dayT==curDate.getDate()){
+      today_class='submit_active';
+    } else if (yearT == nextDate.getFullYear() && monthT == (nextDate.getMonth() + 1) && dayT == nextDate.getDate()){
+      tomorrow_class='submit_active';
+    } else{
+      otherday_class='submit_active',
+      otherday_title=yearT+'年'+monthT+'月'+dayT+'日'
+    }
+    this.setData({
+      year:yearT,
+      month:monthT,
+      date:dayT,
+      today:today_class,
+      tomorrow:tomorrow_class,
+      otherDate:otherday_class,
+      otherDateTitle:otherday_title
+    })
+
+
     wx.setNavigationBarTitle({
       title: '选择出行时间',
     })

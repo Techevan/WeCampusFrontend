@@ -60,12 +60,6 @@ if (strDay - 6 > 0){
  * 函数：完成数据回传
  */
 function directBack(){
-  /*wx.redirectTo({
-    url: '../timeSelector/timeSelector?year='+year_selected+'&month='+month_selected+'&day='+day_selected,
-    success: function(res) {},
-    fail: function(res) {},
-    complete: function(res) {},
-  })*/
   let pages=getCurrentPages();
   let prevpage=pages[pages.length-2];
   prevpage.setData({

@@ -298,6 +298,7 @@ Page({
       return;
     }else{
       scheduleTime=todaySchedule[index - 1];
+      alertDisabled(deptDate, scheduleTime, routeName, boundFor, this);
       this.setData({
         scheduleTime:scheduleTime
       })
@@ -317,6 +318,7 @@ Page({
       return;
     }else{
       scheduleTime=todaySchedule[index+1];
+      alertDisabled(deptDate, scheduleTime, routeName, boundFor, this);
       this.setData({
         scheduleTime:scheduleTime
       })

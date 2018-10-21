@@ -3,8 +3,9 @@ App({
   onLaunch:function(){
     wx.login({
       success:res=>{
+        console.log(res.code)
         wx.request({
-          url: this.globalData.URL +'api/code_to_session.php',
+          url: this.globalData.domain +'api/code_to_session.php',
           data:{
             code: res.code
           },
@@ -138,8 +139,7 @@ App({
   },
   */
   globalData: {
-    URL:'https://www.we-campus.cn/WeCampus/',
-    domain:'https://www.we-campus.cn/WeCampus/',
+    domain:'https://wecampus.techevan.wang/WeCampus/',
     userInfo: null,
     openID:null,
     school:null,

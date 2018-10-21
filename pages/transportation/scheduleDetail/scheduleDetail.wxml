@@ -42,7 +42,13 @@
       <view class='infoTitle'>乘车地点</view>
       <view class='infoDetail'>{{positionInfo}}</view>
     </view>
-    <map id="map" longitude="{{GPSy}}" latitude="{{GPSx}}" scale="18" markers="{{markers}}" style="width: 100%; height: 150px;margin-top:8pt;"></map>
+    <map
+      id="map"
+      style="width: 100%; height: 150px;margin-top:8pt;"
+      longitude="{{GPSy}}" latitude="{{GPSx}}"
+      scale='18'
+      subkey="BEHBZ-3KBR4-M34UV-XFVY5-ZOY2Z-PJBZA"
+    ></map>
   </view>
   <!--
   <view class='mainInfo' style='margin-bottom:8pt;'>
