@@ -84,6 +84,10 @@ function requestStationList(that,GPSx,GPSy,callback){
         stationDisplay:stationList[0].label
       })
       callback(thatT,deptStationID,date.getFullYear(),date.getMonth()+1,date.getDate(),date.getHours(),date.getMinutes());
+    },
+    fail:function(res)
+    {
+      console.log(res)
     }
   })
 }
@@ -183,20 +187,24 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    if (year == this.data.year && month == this.data.month && day == this.data.date && hour == this.data.hour && minute == this.data.minute){
+    var app=getApp()
+    var dateT=new Date();
+    if(app.globalData.transportationHide==true){
+      app.globalData.transportationHide=false;
+    }else if (year == this.data.year && month == this.data.month && day == this.data.date && hour == this.data.hour && minute == this.data.minute){
       // 和上一次相比什么都没有改变
       return;
     }
-
+    console.log("刷新时间了")
     year = this.data.year;
     month = this.data.month;
     day = this.data.date;
     hour = this.data.hour;
     minute = this.data.minute;
     var tempDeptTime ='';
-    if(year==date.getFullYear()&&month==date.getMonth()+1&&day==date.getDate()&&hour==date.getHours()&&minute==date.getMinutes()){
+    if(year==dateT.getFullYear()&&month==dateT.getMonth()+1&&day==dateT.getDate()&&hour==dateT.getHours()&&minute==dateT.getMinutes()){
       tempDeptTime='现在';
-    } else if (year == date.getFullYear() && month == date.getMonth() + 1 && day == date.getDate()) {
+    } else if (year == dateT.getFullYear() && month == dateT.getMonth() + 1 && day == dateT.getDate()) {
       tempDeptTime = '今天' + hour + '时' + minute + '分';
     } else {
       tempDeptTime = year + '年' + month + '月' + day + '日 ' + hour + '时' + minute + '分';
@@ -251,7 +259,7 @@ Page({
    */
   deptTime:function(){
     wx.navigateTo({
-      url: '../timeSelector/timeSelector?year='+year+'&month='+month+'&day='+day,
+      url: '../timeSelector/timeSelector?year='+year+'&month='+month+'&day='+day+'&hour='+hour+'&minute='+minute,
     })
   },
 

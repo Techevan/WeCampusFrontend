@@ -20,6 +20,7 @@ for(let i=0;i<24;i++){
   hours.push(i);
 }
 
+
 for(let i=0;i<60;i++){
   if (i < 10) {
     i = '0' + i;
@@ -58,6 +59,10 @@ Page({
     var yearT = parseInt(options.year);
     var monthT = parseInt(options.month);
     var dayT=parseInt(options.day);
+    var hourT=parseInt(options.hour);
+    var minuteT=parseInt(options.minute);
+    hour=hourT;
+    minute=minuteT;
 
     if (yearT==curDate.getFullYear()&&monthT==(curDate.getMonth()+1)&&dayT==curDate.getDate()){
       today_class='submit_active';
@@ -71,6 +76,7 @@ Page({
       year:yearT,
       month:monthT,
       date:dayT,
+      value:[hour,minute,second],
       today:today_class,
       tomorrow:tomorrow_class,
       otherDate:otherday_class,
@@ -156,13 +162,14 @@ Page({
     month=currentDate.getMonth()+1;
     date=currentDate.getDate();
 */
+    var dateTime=new Date();
     this.setData({
       today: "submit_active",
       tomorrow: "submit",
       otherDate: "submit",
-      year:currentDate.getFullYear(),
-      month:currentDate.getMonth()+1,
-      date:currentDate.getDate()
+      year:dateTime.getFullYear(),
+      month:dateTime.getMonth()+1,
+      date:dateTime.getDate()
     })
   },
   /**

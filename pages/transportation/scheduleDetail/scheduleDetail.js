@@ -254,6 +254,7 @@ Page({
         pattern_id: patternID
       },
       success:function(res){
+        console.log(res)
         if(res.data.success==true){
           thatT.setData({
             alertDisabled: true,
