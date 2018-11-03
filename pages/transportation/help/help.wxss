@@ -1,0 +1,14 @@
+/* pages/transportation/help/help.wxss */
+.submit_hover{
+  background-color: #eeeeee;
+  border-color: #3399ff;
+  color: #3399ff;
+}
+
+.submit_active{
+  background-color: #3399ff;
+  border-color: #fefefe;
+  border-radius: 3pt;
+  margin-left:6rpx;
+  color:white;
+}

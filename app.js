@@ -18,7 +18,15 @@ App({
           }
         })
       }
-    })
+    });
+    var temp = wx.getStorageSync('help');
+    console.log(temp)
+    if (temp==''){
+      console.log('hh')
+      wx.navigateTo({
+        url: 'pages/transportation/help/help',
+      })
+    }
   },
   /*
   onLaunch: function () {
@@ -144,6 +152,7 @@ App({
     openID:null,
     school:null,
     qualification:false,
+    transportationHide:false,
     privacy:{
       name:null,
       phone:null,
@@ -154,5 +163,8 @@ App({
       "Content-Type":"application/x-www-form-urlencoded"
     }
 
+  },
+  onHide:function(){
+    getApp().globalData.transportationHide=true;
   }
 })

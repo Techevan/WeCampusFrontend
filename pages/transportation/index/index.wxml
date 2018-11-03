@@ -34,8 +34,8 @@
       <view class='content'>{{item.content}}</view>
     </view>
     <!--卡片类型4：广告-->
-    <view wx:if='{{item.card==4}}' class='card'>
-      <ad unit-id="{{item.unitID}}"></ad>
+    <view wx:if='{{item.card==4}}' class='ad-card ad'>
+      <ad unit-id="{{item.unitID}}" style='border-top-right-radius: 5pt;border-bottom-right-radius: 5pt;'></ad>
     </view>
   </view>
   <view wx:if="{{noInfo!=''}}">

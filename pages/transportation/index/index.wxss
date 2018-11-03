@@ -50,6 +50,13 @@ page{
   margin-bottom: 8pt;
 }
 
+.ad-card{
+  border-top-left-radius: 3pt;
+  border-top-right-radius: 5pt;
+  border-bottom-left-radius: 3pt;
+  border-bottom-right-radius: 5pt;
+}
+
 .left{
   display: inline-block;
   width: 60%;
@@ -101,4 +108,10 @@ page{
 
 .copy-card{
   border-left: solid 3pt #00CED1
+}
+
+.ad{
+  border-left: solid 3pt #00CED1;
+  margin-bottom: 8pt;
+  
 }

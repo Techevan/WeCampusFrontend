@@ -1,0 +1,14 @@
+<!--pages/transportation/help/help.wxml-->
+<view>
+  <swiper indicator-dots='true' indicator-color='#3399ff' circular='true' style='width:750rpx;height:958rpx' bindchange='swiper'>
+    <block wx:for='{{imgUrls}}'>
+      <swiper-item>
+        <image src='{{item}}' style='width:675rpx;height:675rpx;padding-left:37rpx'></image>
+        <view style='font-weight:bold;color:#3399ff;text-align:center;font-size:16pt;margin-bottom:8pt'>{{swiperText}}</view>
+      </swiper-item>
+    </block>
+  </swiper>
+</view>
+<view style='text-align:center;margin-top:8pt'>
+  <button class='submit_active' hover-class='submit_hover' size='mini' bindtap='buttonClick'>我知道了，开始查询</button>
+</view>

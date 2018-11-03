@@ -22,7 +22,7 @@
   <view class='{{alertClass}}'>{{alertInfo}}</view>
   <view class='alert-warning' hidden='{{warningDisplay}}'>
     <!--<view style='font-weight:bold'>提醒标题</view>-->
-    <view>{{warning}}</view>
+    {{warning}}
   </view>
   <view class='mainInfo'>
     <view class='subtitle'>乘车信息</view>
