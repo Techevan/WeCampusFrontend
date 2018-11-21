@@ -1,12 +1,16 @@
 <!--pages/transportation/index.wxml-->
+<wux-backdrop id="wux-backdrop" />
+
+<wux-floating-button position="bottomRight" theme="positive" buttons="{{ buttons }}" bind:change="onChange" bind:click="onClick" backdrop='true' />
+
 <view class='header'>
   <picker class='dept' bindchange='stationList' value='{{stationList}}' range='{{stationList}}' mode='selector' range-key='label' >
-    <view class='deptStop'>{{stationDisplay}}</view>
-    <view class='deptList'>▼</view>
+    <view class='deptStop'>{{stationDisplay}} </view>
+    <view class='deptList'>切换 ▼</view>
   </picker>
   <view class='deptTime' bindtap='deptTime'>
-    <text>{{deptTime}}出发</text>
-    <text style='font-weight:bold;font-size:10pt'>＞</text>
+    <text>{{deptTime}}出发 </text>
+    <div class='selectTime'>切换出发时间 ▼</div>
   </view>
 </view>
 

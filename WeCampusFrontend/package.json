@@ -1,0 +1,12 @@
+{
+  "name": "wxtest",
+  "description": "wx test project",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {}
+}

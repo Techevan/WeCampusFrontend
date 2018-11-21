@@ -1,0 +1,12 @@
+/* pages/login/login.wxss */
+
+page{
+  background-color: #f0f0f0
+}
+
+.body{
+  width: 95%;
+  margin: auto;
+  padding-top: 5pt;
+  padding-bottom:2pt;
+}

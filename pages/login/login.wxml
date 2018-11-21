@@ -1,0 +1,165 @@
+<!--pages/login/login.wxml-->
+<view class='body'>
+  <view id='steps' style='margin-top:48rpx'>
+    <wux-steps current="{{ currentStep }}">
+      <wux-step title="微信授权"></wux-step>
+      <wux-step title="信息确认"></wux-step>
+      <wux-step title="完成"></wux-step>
+    </wux-steps>
+  </view>
+  <view id='step1' style='margin-top:144rpx;'>
+    <wux-animation-group in="{{ animation1_1 }}" duration="5000" class-names='wux-animate--fadeIn' enter="true" exit="{{false}}" style='text-align:center;'>
+      <image src='/lib/icon/wecampus.png' style='width:144rpx;height:144rpx;margin:auto;border-radius:72rpx;margin-bottom:36rpx'></image>
+    </wux-animation-group>
+    <wux-animation-group in="{{ animation1_2 }}" duration="5000" class-names='wux-animate--fadeIn' enter="true" exit="{{false}}" >
+      <view style='text-align:center;font-size:40rpx;margin-bottom:14rpx'>"你好，我叫微校"</view>
+    </wux-animation-group>
+    <wux-animation-group in="{{ animation1_3 }}" duration="5000" class-names='wux-animate--fadeIn' enter="true" exit="{{false}}" >
+      <view style='text-align:center;font-size:56rpx'>"我可以认识你吗"</view>
+    </wux-animation-group>
+    <wux-animation-group in="{{ animation1_4 }}" duration="{{2000}}" class-names='wux-animate--fadeInDown' enter="true" exit="{{false}}" >
+      <view style='text-align:center;padding-top:112rpx'>
+        <wux-button outline type="positive" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo"><wux-icon type="ios-chatbubbles" size="16" /> 授权登录</wux-button>
+      </view>
+    </wux-animation-group> 
+  </view>
+
+  <view id='step2' style='margin-top:144rpx;'>
+    <!--第一个场景：昵称-->
+    <wux-animation-group in="{{ animation2_1_1 }}" duration="5000" class-names='wux-animate--fadeIn' enter="true" exit="{{false}}" style='text-align:center;'>
+      <image src='/lib/icon/question.png' style='width:144rpx;height:144rpx;margin:auto;border-radius:72rpx;margin-bottom:36rpx'></image>
+    </wux-animation-group>
+    <wux-animation-group in="{{ animation2_1_2 }}" duration="5000" class-names='wux-animate--fadeIn' enter="true" exit="{{false}}">
+      <view style='text-align:center;font-size:48rpx;margin-bottom:16rpx'>Hey, {{nickName}} </view>
+    </wux-animation-group>
+    <wux-animation-group in="{{ animation2_1_3 }}" duration="5000" class-names='wux-animate--fadeIn' enter="true" exit="{{false}}">
+      <view style='text-align:center;font-size:56rpx;margin-bottom:112rpx'>"我可以这样称呼你么"</view>
+    </wux-animation-group>
+    <wux-animation-group in="{{ animation2_1_4 }}" duration="5000" class-names='wux-animate--fadeInDown' enter="true" exit="{{false}}" style='text-align:center;'>
+      <wux-button type="assertive" outline style='margin-right:12prx' bindtap='bindEditNickName'><wux-icon type="md-quote" size="16" /> 不如换个称呼</wux-button>
+      <wux-button type="balanced" outline style='margin-left:12rpx' bindtap='bindSaveNickName'><wux-icon type="ios-arrow-dropdown-circle" size="16" /> 好的</wux-button>
+    </wux-animation-group>
+    <!--第二个场景：头像-->
+    <wux-animation-group in="{{ animation2_2_1 }}" duration="5000" class-names='wux-animate--fadeIn' enter="true" exit="{{false}}" style='text-align:center;'>
+      <image src='{{avatarUrl}}' style='width:144rpx;height:144rpx;margin:auto;border-radius:72rpx;margin-bottom:36rpx'></image>
+    </wux-animation-group>
+    <wux-animation-group in="{{ animation2_2_2 }}" duration="5000" class-names='wux-animate--fadeIn' enter="true" exit="{{false}}" style='text-align:center;'>
+      <view style='text-align:center;font-size:56rpx;margin-bottom:16rpx'>初次见面请多关照</view>
+    </wux-animation-group>
+    <wux-animation-group in="{{ animation2_2_3 }}" duration="5000" class-names='wux-animate--fadeIn' enter="true" exit="{{false}}" style='text-align:center;'>
+      <view style='text-align:center;font-size:40rpx;margin-bottom:72rpx'>换个头像吗</view>
+    </wux-animation-group>
+    <wux-animation-group in="{{ animation2_2_4 }}" duration="5000" class-names='wux-animate--fadeInDown' enter="true" exit="{{false}}" style='text-align:center;'>
+      <wux-button type="assertive" outline style='margin-right:12rpx' bindtap='bindEditAvatare'><wux-icon type="ios-contact" size="16" /> 换个头像吧</wux-button>
+      <wux-button type="balanced" outline style='margin-left:12rpx' bindtap='bindSaveAvatar'><wux-icon type="ios-arrow-dropdown-circle" size="16" /> 不用了</wux-button>
+    </wux-animation-group>
+    <!--第三个场景：学校-->
+    <wux-animation-group in="{{ animation2_3_1 }}" duration="5000" class-names='wux-animate--fadeIn' enter="true" exit="{{false}}" style='text-align:center;'>
+      <image src='{{universityLogo}}' style='width:144rpx;height:144rpx;margin:auto;border-radius:72rpx;margin-bottom:24rpx'></image>
+    </wux-animation-group>
+    <wux-animation-group in="{{ animation2_3_2 }}" duration="5000" class-names='wux-animate--fadeIn' enter="true" exit="{{false}}" style='text-align:center;'>
+      <view style='text-align:center;font-size:56rpx;margin-bottom:14rpx'>你来自{{universityLabel}}对不对</view>
+    </wux-animation-group>
+    <wux-animation-group in="{{ animation2_3_3 }}" duration="5000" class-names='wux-animate--fadeIn' enter="true" exit="{{false}}" style='text-align:center;'>
+      <view style='text-align:center;font-size:28rpx;margin-bottom:72rpx'>聪明的微校通过你的GPS信息智能判断</view>
+    </wux-animation-group>
+    <wux-animation-group in="{{ animation2_3_4 }}" duration="5000" class-names='wux-animate--fadeInDown' enter="true" exit="{{false}}" style='text-align:center;'>
+      <wux-button type="assertive" outline style='margin-right:12rpx' bindtap='bindEditUniversity'><wux-icon type="ios-close-circle" size="16" /> 不对</wux-button>
+      <wux-button type="balanced" outline style='margin-left:12rpx' bindtap='bindSaveUniversity'><wux-icon type="ios-arrow-dropdown-circle" size="16" /> 对的</wux-button>
+    </wux-animation-group>
+    <!--第三个场景第二个分支：位置请求被拒绝-->
+    <wux-animation-group in="{{ animation2_3_5 }}" duration="5000" class-names='wux-animate--fadeIn' enter="true" exit="{{false}}" style='text-align:center;'>
+      <image src='{{universityLogo}}' style='width:128rpx;height:128rpx;margin:auto;border-radius:64rpx;margin-bottom:24rpx'></image>
+    </wux-animation-group>
+    <wux-animation-group in="{{ animation2_3_6 }}" duration="5000" class-names='wux-animate--fadeIn' enter="true" exit="{{false}}" style='text-align:center;' style='line-height:200%' >
+      <view style='text-align:center;font-size:52rpx;margin-bottom:12rpx'>你似乎拒绝了我的位置请求</view>
+    </wux-animation-group>
+    <wux-animation-group in="{{ animation2_3_7 }}" duration="5000" class-names='wux-animate--fadeIn' enter="true" exit="{{false}}" style='text-align:center;' style='line-height:150%' >
+      <view style='text-align:center;font-size:28rpx;margin-bottom:72rpx'>可是微校想知道你来自哪所大学呢</view>
+    </wux-animation-group>
+    <wux-animation-group in="{{ animation2_3_8 }}" duration="5000" class-names='wux-animate--fadeInDown' enter="true" exit="{{false}}" style='text-align:center;'>
+      <wux-button type="positive" outline bindtap='bindEditUniversity'><wux-icon type="ios-arrow-dropdown-circle" size="16" /> 选择我的学校</wux-button>
+    </wux-animation-group>
+    
+    <!--第四个场景：姓名
+    <wux-animation-group in="{{ animation2_4_1 }}" duration="5000" class-names='wux-animate--fadeIn' enter="true" exit="{{false}}" style='text-align:center;'>
+      <image src='/lib/icon/person.png' style='width:128rpx;height:128rpx;margin:auto;border-radius:64rpx;margin-bottom:24rpx'></image>
+    </wux-animation-group>
+    <wux-animation-group in="{{ animation2_4_2 }}" duration="5000" class-names='wux-animate--fadeIn' enter="true" exit="{{false}}" style='text-align:center;' style='line-height:200%' >
+      <view style='text-align:center;font-size:52rpx;margin-bottom:12rpx'>请告诉我你的真实姓名</view>
+    </wux-animation-group>
+    <wux-animation-group in="{{ animation2_4_3 }}" duration="5000" class-names='wux-animate--fadeIn' enter="true" exit="{{false}}" style='text-align:center;' style='line-height:150%' >
+      <view style='text-align:center;font-size:28rpx;margin-bottom:72rpx'>某些功能模块下这样可以为你更好地服务</view>
+    </wux-animation-group>
+    <wux-animation-group in="{{ animation2_4_4 }}" duration="5000" class-names='wux-animate--fadeInDown' enter="true" exit="{{false}}" style='text-align:center;'>
+      <wux-button type="assertive" outline style='margin-right:12rpx' bindtap='bindSkipName'><wux-icon type="ios-contact" size="16" /> 跳过</wux-button>
+      <wux-button type="balanced" outline style='margin-left:12rpx' bindtap='bindEditName'><wux-icon type="ios-arrow-dropdown-circle" size="16" /> 好的</wux-button>
+    </wux-animation-group>
+    <!--第五个场景：手机号
+    <wux-animation-group in="{{ animation2_5_1 }}" duration="5000" class-names='wux-animate--fadeIn' enter="true" exit="{{false}}" style='text-align:center;'>
+      <image src="{{userInfo.gender==1?'/lib/icon/male.png':'/lib/icon/female.png'}}" style='width:144rpx;height:144rpx;margin:auto;border-radius:72rpx;margin-bottom:36rpx'></image>
+    </wux-animation-group>
+    <wux-animation-group in="{{ animation2_5_2 }}" duration="5000" class-names='wux-animate--fadeIn' enter="true" exit="{{false}}" style='text-align:center;' style='line-height:200%' >
+      <view style='text-align:center;font-size:52rpx;margin-bottom:12rpx'>
+        <text wx:if='{{userInfo.gender==1}}'>帅哥，留个电话呗</text>
+        <text wx:if='{{userInfo.gender==2}}'>美女，留个电话呗</text>
+        <text wx:if='{{userInfo.gender==0}}'>嘿，留个电话呗</text>
+      </view>
+    </wux-animation-group>
+    <wux-animation-group in="{{ animation2_5_3 }}" duration="5000" class-names='wux-animate--fadeIn' enter="true" exit="{{false}}" style='text-align:center;' style='line-height:150%' >
+      <view style='text-align:center;font-size:28rpx;margin-bottom:72rpx'>短信提醒让高校生活更轻松</view>
+    </wux-animation-group>
+    <wux-animation-group in="{{ animation2_5_4 }}" duration="5000" class-names='wux-animate--fadeInDown' enter="true" exit="{{false}}" style='text-align:center;'>
+      <wux-button type="assertive" outline style='margin-right:12rpx' bindtap='bindSkipName'><wux-icon type="ios-contact" size="16" /> 跳过</wux-button>
+      <wux-button type="balanced" outline style='margin-left:12rpx' bindtap='bindEditName'><wux-icon type="ios-arrow-dropdown-circle" size="16" /> 好的</wux-button>
+    </wux-animation-group>
+-->
+
+
+  </view>
+  <view id='step3' style='margin-top:144rpx;'>
+    <wux-animation-group in="{{ animation3_1_1 }}" duration="5000" class-names='wux-animate--fadeIn' enter="true" exit="{{false}}" style='text-align:center;'>
+      <image src='/lib/icon/smile.png' style='width:144rpx;height:144rpx;margin:auto;border-radius:72rpx;margin-bottom:36rpx'></image>
+    </wux-animation-group>
+    <wux-animation-group in="{{ animation3_1_2 }}" duration="5000" class-names='wux-animate--fadeIn' enter="true" exit="{{false}}" >
+      <view style='text-align:center;font-size:40rpx;margin-bottom:14rpx'>谢谢你，{{nickName}}</view>
+    </wux-animation-group>
+    <wux-animation-group in="{{ animation3_1_3 }}" duration="5000" class-names='wux-animate--fadeIn' enter="true" exit="{{false}}" >
+      <view style='text-align:center;font-size:56rpx'>可以更进一步了解你吗</view>
+    </wux-animation-group>
+    <wux-animation-group in="{{ animation3_1_4 }}" duration="{{2000}}" class-names='wux-animate--fadeInDown' enter="true" exit="{{false}}" >
+      <view style='text-align:center;padding-top:112rpx'>
+        <wux-button type="assertive" outline style='margin-right:12rpx' bindtap='bindNoThanks'><wux-icon type="ios-close-circle" size="16" /> 先不用了</wux-button>
+      <wux-button type="balanced" outline style='margin-left:12rpx' bindtap='bindYesPlease'><wux-icon type="ios-arrow-dropdown-circle" size="16" /> 好的</wux-button>
+      </view>
+    </wux-animation-group>
+    <!--拒绝进一步了解后的反应-->
+    <wux-animation-group in="{{ animation3_2_1 }}" duration="5000" class-names='wux-animate--fadeIn' enter="true" exit="{{false}}" style='text-align:center;'>
+      <image src='/lib/icon/sad.png' style='width:144rpx;height:144rpx;margin:auto;border-radius:72rpx;margin-bottom:36rpx'></image>
+    </wux-animation-group>
+    <wux-animation-group in="{{ animation3_2_2 }}" duration="5000" class-names='wux-animate--fadeIn' enter="true" exit="{{false}}" >
+      <view style='text-align:center;font-size:56rpx;margin-bottom:14rpx'>那好叭，{{nickName}}</view>
+    </wux-animation-group>
+    <wux-animation-group in="{{ animation3_2_3 }}" duration="5000" class-names='wux-animate--fadeIn' enter="true" exit="{{false}}" >
+      <view style='text-align:center;font-size:36rpx;margin-bottom:72rpx'>那么稍后可以在个人中心中补充信息哦</view>
+    </wux-animation-group>
+    <wux-animation-group in="{{ animation3_2_4 }}" duration="{{2000}}" class-names='wux-animate--fadeInDown' enter="true" exit="{{false}}" >
+      <view style='text-align:center;padding-top:112rpx'>
+        <wux-button outline type="positive" open-type="getUserInfo" bindgetuserinfo="bindFinish"><wux-icon type="ios-chatbubbles" size="16" /> 开启微校生活</wux-button>
+      </view>
+    </wux-animation-group> 
+  </view>
+
+</view>
+
+
+
+
+
+<view id='step2'>
+
+</view>
+
+<view id='step3'>
+
+</view>

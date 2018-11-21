@@ -1,1 +1,7 @@
-{}
+{
+  "usingComponents": {
+    "wux-floating-button": "../../../dist/floating-button/index",
+    "wux-backdrop": "../../../dist/backdrop/index",
+    "wux-button": "../../../dist/button/index"
+  }
+}

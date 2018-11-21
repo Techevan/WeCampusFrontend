@@ -1,4 +1,6 @@
 // pages/transportation/index.js
+import { $wuxBackdrop } from '../../../dist/index'
+
 var info=new Array();
 var message=[];
 var stationList = [];
@@ -145,13 +147,34 @@ Page({
     hour:date.getHours(),
     minute:date.getMinutes(),
     stationDisplay:'加载中……',
-    noInfo:''
+    noInfo:'',
+    buttons:[{
+      label:'意见反馈',
+      icon:'/lib/icon/feedback.png'
+    },
+    {
+      label:'使用帮助',
+      icon: '/lib/icon/help.png'
+    },
+    {
+      label:'分享小程序',
+      openType: 'share',
+      icon: '/lib/icon/share.png',
+    },
+    //{
+    //  label:'我的微校',
+    //  icon:'/lib/icon/my.png'
+    //}
+    ]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // 浮动按钮蒙版
+    this.$wuxBackdrop = $wuxBackdrop()
+
     wx.showLoading({
       title: '加载中',
     })
@@ -187,6 +210,13 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    wx.setNavigationBarColor({
+      frontColor: '#ffffff',
+      backgroundColor: '#3399ff',
+    })
+    wx.setNavigationBarTitle({
+      title: ' ',
+    })
     var app=getApp()
     var dateT=new Date();
     if(app.globalData.transportationHide==true){
@@ -306,5 +336,49 @@ Page({
     })
     requestInfo(this, deptStationID, year, month, day, hour, minute);
 
+  },
+
+  /**
+   * 监听浮动按钮
+   */
+  onClick(e) {
+    if (e.detail.index === 1) {
+      wx.navigateTo({
+        url: '../help/help',
+      })
+    }else if(e.detail.index===0){
+      wx.navigateTo({
+        url: '../feedback/feedback?index=true',
+      })
+    }else if(e.detail.index==3){
+      wx.navigateTo({
+        url: '../../login/login',
+      })
+    }
+  },
+  onChange(e){
+    if (this.$wuxBackdrop.backdropHolds == 0 || typeof (this.$wuxBackdrop.backdropHolds)=='undefined'){
+      wx.setNavigationBarColor({
+        frontColor: '#ffffff',
+        backgroundColor: '#1E5A96',
+      })
+      this.$wuxBackdrop.retain();
+    } else if (this.$wuxBackdrop.backdropHolds!=0){
+      wx.setNavigationBarColor({
+        frontColor: '#ffffff',
+        backgroundColor: '#3399ff',
+      })
+      this.$wuxBackdrop.release();
+    }
+  },
+
+  /**
+   * 监听分享事件
+   */
+  onShareAppMessage(e){
+    return{
+      title: '听说微校查出行很好用，快试试',
+      imageUrl:'/lib/shareCard/basic.png'
+    }
   }
 })  

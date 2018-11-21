@@ -7,7 +7,8 @@ Page({
    */
   data: {
     textareaClass:'inputBlock-blur',
-    inputClass:'emailBlock-blur'
+    inputClass:'emailBlock-blur',
+    infoHidden:true
   },
 
   /**
@@ -21,7 +22,12 @@ Page({
     wx.setNavigationBarTitle({
       title: '意见反馈',
     })
+    console.log(options.time)
+    if(options.index=='true'){
+      return;
+    }
     this.setData({
+      infoHidden:false,
       info:{
         time:options.time,
         date:options.date,
@@ -122,6 +128,48 @@ Page({
    */
   formSubmit:function(res){
     var thatT=this;
+
+    // 判断字段是否为空
+    if (res.detail.value.feedback == '' || res.detail.value.email==''){
+      wx.showToast({
+        icon: 'none',
+        title: '反馈意见和邮箱均必填，请重试',
+      })
+      return;
+    }
+
+    // 根据入口判断显示内容
+    if(this.data.infoHidden==true){
+      console.log('Aaaaaaaaaa')
+      wx.request({
+        url: app.globalData.domain + 'transportation/api/post_feedback_info.php',
+        method: 'POST',
+        header: app.globalData.requestHeader,
+        data: {
+          route_name: '',
+          time: '00:00:00',
+          cur_date: '',
+          end_station_name: '',
+          stop_name: '',
+          open_id: app.globalData.openID,
+          form_id: res.detail.formId,
+          feedback: res.detail.value.feedback,
+          email: res.detail.value.email
+        },
+        success: function (res) {
+          if (res.data.success = true) {
+            wx.showToast({
+              icon: 'none',
+              title: '您已成功提交,谢谢反馈',
+            })
+            setTimeout(function () {
+              wx.navigateBack({});
+            }, 1000)
+          }
+        }
+      })
+      return;
+    }
     wx.request({
       url: app.globalData.domain +'transportation/api/post_feedback_info.php',
       method:'POST',
