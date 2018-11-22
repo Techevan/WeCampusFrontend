@@ -1,8 +1,8 @@
 // pages/login/login.js
-
+import { $wuxDialog } from '../../dist/index'
 // 判断电话号码用
 const isTel = (value) => !/^1[34578]\d{9}$/.test(value)
-
+var app = getApp();
 
 var userInfo={};
 var savedUserInfo={};
@@ -15,7 +15,8 @@ Page({
   data: {
     //控制Step1/2/3动画组
     animation1:false,
-    currentStep:0
+    currentStep:0,
+    avatarTemp:"../../lib/icon/plus.png"
   },
 
   /**
@@ -176,7 +177,63 @@ Page({
    * 绑定编辑昵称
    */
   bindEditNickName:function(){
-
+    var that = this;
+    const alert = (content) => {
+      $wuxDialog('#wux-dialog--alert').alert({
+        resetOnClose: true,
+        title: '提示',
+        content: content,
+      })
+    }
+  
+    $wuxDialog().prompt({
+      resetOnClose: true,
+      title: '设置昵称',
+      content: '你希望我怎么称呼你呢？',
+      fieldtype: 'text',
+      defaultText: '',
+      placeholder: '请输入新昵称（不多于8字）',
+      maxlength: 8,
+      cancelText:'放弃',
+      onConfirm(e, response) {        
+        if(response.length===0){
+          alert('诶？你貌似没有填写昵称诶……');
+          return;
+        }else{
+          savedUserInfo.nickName = response;
+          console.log(savedUserInfo)
+          that.setData({
+            animation2_1_1: false,
+            animation2_1_2: false,
+            animation2_1_3: false,
+            animation2_1_4: false,
+            nickName:response,
+            avatarUrl: userInfo.avatarUrl
+          })
+          setTimeout(function () {
+            that.setData({
+              animation2_2_1: true,
+            })
+          }, 500)
+          setTimeout(function () {
+            that.setData({
+              animation2_2_2: true,
+            })
+          }, 1000)
+          setTimeout(function () {
+            that.setData({
+              animation2_2_3: true,
+            })
+          }, 1500)
+          setTimeout(function () {
+            that.setData({
+              animation2_2_4: true,
+            })
+          }, 2000)
+        }
+      },
+    })
+    
   },
 
   /**
@@ -184,12 +241,19 @@ Page({
    */
   bindSaveAvatar:function(){
     savedUserInfo.avatarUrl=userInfo.avatarUrl;
+    console.error(userInfo)
+    console.error(savedUserInfo)
+
     var that = this;
     this.setData({
       animation2_2_1: false,
       animation2_2_2: false,
       animation2_2_3: false,
       animation2_2_4: false,
+      animation2_2_5: false,
+      animation2_2_6: false,
+      animation2_2_7: false,
+      animation2_2_8: false,
     })
     wx.showLoading({
       title: '加载中',
@@ -300,6 +364,33 @@ Page({
    * 绑定编辑头像
    */
   bindEditAvatar:function(){
+    var that=this;
+    that.setData({
+      animation2_2_1: false,
+      animation2_2_2: false,
+      animation2_2_3: false,
+      animation2_2_4: false,
+    })
+    setTimeout(function () {
+      that.setData({
+        animation2_2_5: true,
+      })
+    }, 500)
+    setTimeout(function () {
+      that.setData({
+        animation2_2_6: true,
+      })
+    }, 1000)
+    setTimeout(function () {
+      that.setData({
+        animation2_2_7: true,
+      })
+    }, 1500)
+    setTimeout(function () {
+      that.setData({
+        animation2_2_8: true,
+      })
+    }, 2000)
 
   },
   /**
@@ -307,13 +398,17 @@ Page({
    */
   bindSaveUniversity:function(){
     var that=this;
-    savedUserInfo.universityLabel=userInfo.universityLabel;
     savedUserInfo.universityValue=userInfo.universityValue;
     this.setData({
       animation2_3_1: false,
       animation2_3_2: false,
       animation2_3_3: false,
       animation2_3_4: false,
+      animation2_3_5: false,
+      animation2_3_6: false,
+      animation2_3_7: false,
+      animation2_3_8: false,
+      animation2_3_9: false,
       currentStep: 2,
     })
     setTimeout(function () {
@@ -342,7 +437,25 @@ Page({
    * 绑定编辑大学
    */
   bindEditUniversity:function(){
+    var universityList = [{ 'title':'北京大学', 'value':1 }, { 'title':'清华大学', 'value':2 }, { 'title':'上海交通大学', 'value':3 }, { 'title':'复旦大学', 'value':4 }]
 
+    var that=this;
+    this.setData({
+      animation2_3_1: false,
+      animation2_3_2: false,
+      animation2_3_3: false,
+      animation2_3_4: false,
+      animation2_3_5: false,
+      animation2_3_6: false,
+      animation2_3_7: false,
+      animation2_3_8: false,
+      universityList:universityList
+    })
+    setTimeout(function () {
+      that.setData({
+        animation2_3_9: true,
+      })
+    }, 500)
   },
   
   /**
@@ -391,8 +504,6 @@ Page({
    */
   bindNoThanks:function(){
     var that = this;
-    savedUserInfo.universityLabel = userInfo.universityLabel;
-    savedUserInfo.universityValue = userInfo.universityValue;
     this.setData({
       animation3_1_1: false,
       animation3_1_2: false,
@@ -432,8 +543,61 @@ Page({
    * 绑定完成
    */
   bindFinish:function(){
+    console.log(savedUserInfo)
     wx.navigateBack({
       
     })
+  },
+
+  /**
+   * 绑定头像上传
+   */
+  uploadAvatar:function(){
+    var that=this;
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['compressed'],
+      sourceType: ['album', 'camera'],
+      success(res) {
+        // tempFilePath可以作为img标签的src属性显示图片
+        const tempFilePaths = res.tempFilePaths;
+        wx.showLoading({
+          title: '上传中',
+        })
+        wx.uploadFile({
+          url: app.globalData.domain + 'api/upload_user_avatar.php',
+          filePath: tempFilePaths[0],
+          name: 'avatar',
+          formData: {
+            'open_id':app.globalData.openID
+          },
+          header: app.globalData.requestHeader,
+          success: function (res) {
+            wx.hideLoading();
+            var tempData = JSON.parse(res.data)
+            var imgURL = 'https://www.we-campus.cn/WeCampus/data/cache/'+tempData.temp_url;
+            console.log(imgURL)
+            that.setData({
+              avatarTemp:imgURL
+            })
+            userInfo.avatarUrl = imgURL;//这边还要加入一些逻辑进去
+            console.error(userInfo)
+          }
+        })
+      }
+    })
+
+  },
+
+  /**
+   * 绑定学校选择列表
+   */
+  bindUniversitySelector:function(e){
+    console.error(e.detail);
+    userInfo.universityValue = e.detail.value;
+    this.setData({
+      universitySelectorValue: e.detail.value
+    })
   }
+
 })

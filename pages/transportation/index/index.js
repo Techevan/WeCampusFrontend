@@ -161,10 +161,10 @@ Page({
       openType: 'share',
       icon: '/lib/icon/share.png',
     },
-    //{
-    //  label:'我的微校',
-    //  icon:'/lib/icon/my.png'
-    //}
+    {
+      label:'我的微校',
+      icon:'/lib/icon/my.png'
+    }
     ]
   },
 

@@ -3,10 +3,13 @@
     "wux-steps": "../../dist/steps/index",
     "wux-step": "../../dist/step/index",
     "wux-animation-group": "../../dist/animation-group/index",
-    "wux-icon": "../../../dist/icon/index",
-    "wux-button": "../../../dist/button/index",
-    "wux-cell-group": "../../../dist/cell-group/index",
-    "wux-cell": "../../../dist/cell/index",
-    "wux-input": "../../../dist/input/index"
+    "wux-icon": "../../dist/icon/index",
+    "wux-button": "../../dist/button/index",
+    "wux-cell-group": "../../dist/cell-group/index",
+    "wux-cell": "../../dist/cell/index",
+    "wux-input": "../../dist/input/index",
+    "wux-dialog": "../../dist/dialog/index",
+    "wux-radio-group": "../../dist/radio-group/index",
+    "wux-radio": "../../dist/radio/index"
   }
 }
