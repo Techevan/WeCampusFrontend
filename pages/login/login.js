@@ -16,7 +16,8 @@ Page({
     //控制Step1/2/3动画组
     animation1:false,
     currentStep:0,
-    avatarTemp:"../../lib/icon/plus.png"
+    avatarTemp:"../../lib/icon/plus.png",
+    avatarSpin:false
   },
 
   /**
@@ -149,7 +150,9 @@ Page({
       animation2_1_2: false,
       animation2_1_3: false,
       animation2_1_4: false,
-      avatarUrl:userInfo.avatarUrl
+      animation2_1_5: false,
+      avatarUrl:userInfo.avatarUrl,
+      nickName:savedUserInfo.nickName,
     })
     setTimeout(function () {
       that.setData({
@@ -172,10 +175,23 @@ Page({
       })
     }, 2000)
   },
-  
+  bindEditNickName:function(){
+    var that = this;
+    this.setData({
+      animation2_1_1: false,
+      animation2_1_2: false,
+      animation2_1_3: false,
+      animation2_1_4: false,
+    })
+    setTimeout(function () {
+      that.setData({
+        animation2_1_5: true,
+      })
+    }, 500)
+  },
   /**
    * 绑定编辑昵称
-   */
+   
   bindEditNickName:function(){
     var that = this;
     const alert = (content) => {
@@ -207,6 +223,7 @@ Page({
             animation2_1_2: false,
             animation2_1_3: false,
             animation2_1_4: false,
+            animation2_1_5: false,
             nickName:response,
             avatarUrl: userInfo.avatarUrl
           })
@@ -235,33 +252,17 @@ Page({
     })
     
   },
+  */
 
   /**
    * 绑定保存头像
    */
   bindSaveAvatar:function(){
     savedUserInfo.avatarUrl=userInfo.avatarUrl;
-    console.error(userInfo)
-    console.error(savedUserInfo)
-
     var that = this;
-    this.setData({
-      animation2_2_1: false,
-      animation2_2_2: false,
-      animation2_2_3: false,
-      animation2_2_4: false,
-      animation2_2_5: false,
-      animation2_2_6: false,
-      animation2_2_7: false,
-      animation2_2_8: false,
-    })
-    wx.showLoading({
-      title: '加载中',
-    })
     wx.getLocation({
       success: function(res) {
         console.log(res)
-        wx.hideLoading();
         /*
         wx.request({
           url: '',
@@ -303,9 +304,18 @@ Page({
         })
         */
         // 等待补充接口后修改
+
         that.setData({
           universityLabel:'北京大学',
-          universityLogo: '/lib/icon/pku.png'
+          universityLogo: '/lib/icon/pku.png',
+          animation2_2_1: false,
+          animation2_2_2: false,
+          animation2_2_3: false,
+          animation2_2_4: false,
+          animation2_2_5: false,
+          animation2_2_6: false,
+          animation2_2_7: false,
+          animation2_2_8: false,
         })
         setTimeout(function () {
           that.setData({
@@ -329,9 +339,8 @@ Page({
         }, 2000)
       },
       fail:function(){
-        wx.hideLoading();
         that.setData({
-          universityLogo: '/lib/icon/cry.png'
+          universityLogo: '/lib/icon/cry.png',
         })
         setTimeout(function () {
           that.setData({
@@ -438,7 +447,19 @@ Page({
    */
   bindEditUniversity:function(){
     var universityList = [{ 'title':'北京大学', 'value':1 }, { 'title':'清华大学', 'value':2 }, { 'title':'上海交通大学', 'value':3 }, { 'title':'复旦大学', 'value':4 }]
-
+    /*
+    wx.request({
+      url: 'http://www.we-campus.cn/WeCampus/api/get_school_list.php',
+      header:app.globalData.requestHeader,
+      success(res){
+        console.log(res)
+        var tempData = JSON.parse(res.data)
+        for (let i = 0; i < tempData.length;i++){
+          universityList.push({ 'title': tempData[i].school_name, 'value': tempData[i].school_id});
+        }
+      }
+    })
+    */
     var that=this;
     this.setData({
       animation2_3_1: false,
@@ -536,7 +557,33 @@ Page({
    * 绑定更多信息
    */
   bindYesPlease:function(){
-    
+    var that = this;
+    this.setData({
+      animation3_1_1: false,
+      animation3_1_2: false,
+      animation3_1_3: false,
+      animation3_1_4: false,
+    })
+    setTimeout(function () {
+      that.setData({
+        animation3_2_5: true,
+      })
+    }, 500)
+    setTimeout(function () {
+      that.setData({
+        animation3_2_6: true,
+      })
+    }, 1000)
+    setTimeout(function () {
+      that.setData({
+        animation3_2_7: true,
+      })
+    }, 1500)
+    setTimeout(function () {
+      that.setData({
+        animation3_2_8: true,
+      })
+    }, 2000)
   },
 
   /**
@@ -546,6 +593,26 @@ Page({
     console.log(savedUserInfo)
     wx.navigateBack({
       
+    })
+  },
+
+  /**
+   * 绑定前往个人中心
+   */
+  bindPersonalCenter:function(){
+    this.setData({
+      animation3_2_1: false,
+      animation3_2_2: false,
+      animation3_2_3: false,
+      animation3_2_4: false,
+      animation3_2_5: false,
+      animation3_2_6: false,
+      animation3_2_7: false,
+      animation3_2_8: false,
+      stepHidden:true,
+    })
+    wx.redirectTo({
+      url: '../personalCenter/personalCenter',
     })
   },
 
@@ -561,8 +628,8 @@ Page({
       success(res) {
         // tempFilePath可以作为img标签的src属性显示图片
         const tempFilePaths = res.tempFilePaths;
-        wx.showLoading({
-          title: '上传中',
+        that.setData({
+          avatarSpin:true
         })
         wx.uploadFile({
           url: app.globalData.domain + 'api/upload_user_avatar.php',
@@ -573,11 +640,11 @@ Page({
           },
           header: app.globalData.requestHeader,
           success: function (res) {
-            wx.hideLoading();
             var tempData = JSON.parse(res.data)
             var imgURL = 'https://www.we-campus.cn/WeCampus/data/cache/'+tempData.temp_url;
             console.log(imgURL)
             that.setData({
+              avatarSpin:false,
               avatarTemp:imgURL
             })
             userInfo.avatarUrl = imgURL;//这边还要加入一些逻辑进去
@@ -598,6 +665,13 @@ Page({
     this.setData({
       universitySelectorValue: e.detail.value
     })
+  },
+
+  /**
+   * 绑定输入自定义昵称
+   */
+  bindNickNameInput:function(e){
+    userInfo.nickName=e.detail.value
   }
 
 })

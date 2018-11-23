@@ -1,0 +1,5 @@
+/* pages/personalCenter/personalCenter.wxss */
+@import '../../dist/styles/index.wxss';
+page{
+  background-color: #f0f0f0
+}

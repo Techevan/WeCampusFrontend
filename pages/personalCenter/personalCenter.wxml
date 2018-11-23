@@ -1,0 +1,27 @@
+<!--pages/personalCenter/personalCenter.wxml-->
+<view style="position:absolute;width:100%;height:370rpx;background-image: url('https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83epmsqu4O32XY7U9cGI6wEhy7u58VnJTRfobiczficDkxiazITlGQ8UgDcMVeRI9gDdU6dVpK3dm2Hayw/132');background-size: cover;filter: blur(20px);z-index:-1">
+  1
+</view>
+
+<view style='text-align:center;padding-top:64rpx;padding-bottom:24rpx;'>
+  <image src='https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83epmsqu4O32XY7U9cGI6wEhy7u58VnJTRfobiczficDkxiazITlGQ8UgDcMVeRI9gDdU6dVpK3dm2Hayw/132' style='width:196rpx;height:196rpx;border-radius:98rpx;box-shadow: 0px 0px 5px #a0a0a0;margin-bottom:24rpx'></image>
+  <view>
+    <wux-tag color="gold">Techevan</wux-tag>
+    <wux-tag color="blue">来自同济大学</wux-tag>
+  </view>
+</view>
+
+<view style='font-size:11pt;'>
+  <wux-cell-group title=" " label=' '>
+    <wux-cell title="昵称" is-link extra="Techevan"></wux-cell>
+    <wux-cell title="学校" is-link extra="同济大学"></wux-cell>
+  </wux-cell-group>
+  <wux-cell-group>
+    <wux-cell title="绑定手机号" is-link label="您还没有绑定手机号" extra="绑定"></wux-cell>
+  </wux-cell-group>
+  <wux-cell-group title=" " label=' '>
+    <wux-cell title="真实姓名" is-link extra="王嘉成"></wux-cell>
+    <wux-cell title="学号" is-link extra="1652673"></wux-cell>
+    <wux-cell title="身份认证" is-link extra="已认证"></wux-cell>
+  </wux-cell-group>
+</view>

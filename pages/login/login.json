@@ -10,6 +10,7 @@
     "wux-input": "../../dist/input/index",
     "wux-dialog": "../../dist/dialog/index",
     "wux-radio-group": "../../dist/radio-group/index",
-    "wux-radio": "../../dist/radio/index"
+    "wux-radio": "../../dist/radio/index",
+    "wux-spin": "../../dist/spin/index"
   }
 }
