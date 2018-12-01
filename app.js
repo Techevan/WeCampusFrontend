@@ -1,32 +1,36 @@
 //app.js
 App({
-  onLaunch:function(){
+  onShow:function(){
+    var thatT=this;
     wx.login({
       success:res=>{
-        console.log(res.code)
         wx.request({
           url: this.globalData.domain +'api/code_to_session.php',
           data:{
             code: res.code
           },
-          success:function(e){
-            getApp().globalData.openID=e.data.openid;
+          success:function(res){
+            getApp().globalData.openID = res.data.openid;
+            getApp().globalData.requestHeader.school_id = res.data.school_id;
+            // 通过回调函数确保页面onLoad在onLaunch之后执行
+            if (thatT.userInfoCallback) {
+              thatT.userInfoCallback(thatT.globalData.openId);
+            }
+            // 若该用户school_id为0，即没有注册过，即进行跳转到注册页面
+          
+            if(res.data.school_id===0){
+              wx.navigateTo({
+                url: '../../login/login',
+              })
+            }
           },
           fail:function(e){
             console.log("OPENID获取失败");
-            console.log(e);
           }
         })
       }
     });
-    var temp = wx.getStorageSync('help');
-    console.log(temp)
-    if (temp==''){
-      console.log('hh')
-      wx.navigateTo({
-        url: 'pages/transportation/help/help',
-      })
-    }
+
   },
   /*
   onLaunch: function () {
@@ -159,7 +163,7 @@ App({
       studentID:null
     },
     requestHeader:{
-      "school_id":1,
+      "school_id":0,
       "Content-Type":"application/x-www-form-urlencoded"
     }
 

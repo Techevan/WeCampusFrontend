@@ -2,6 +2,7 @@
   "usingComponents": {
     "wux-cell-group": "../../dist/cell-group/index",
     "wux-cell": "../../dist/cell/index",
-    "wux-tag": "../../dist/tag/index"
+    "wux-tag": "../../dist/tag/index",
+    "wux-input": "../../dist/input/index"
   }
 }

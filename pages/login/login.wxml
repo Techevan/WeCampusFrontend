@@ -49,7 +49,7 @@
       <view class="page__bd" style='width:750rpx;margin-left:-20rpx'>
         <wux-cell-group title="希望我怎么称呼你呢？">
           <wux-cell hover-class="none" style='text-align:left;font-size:12pt;'>
-            <wux-input label="请称呼我为" placeholder='不要超过8个字哦' maxlength='8' bind:change='bindNickNameInput'/>
+            <wux-input label="请称呼我为" placeholder='不要超过13个字哦' maxlength='13' bind:change='bindNickNameInput'/>
           </wux-cell>
         </wux-cell-group>
         <wux-button type="positive" block size='small' style='position:absolute;bottom:24rpx;width:350rpx;left:200rpx;right:200rpx' bindtap='bindSaveNickName'>确定</wux-button>

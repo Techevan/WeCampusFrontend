@@ -18,6 +18,10 @@ var day=date.getDate();
 var hour=date.getHours();
 var minute=date.getMinutes();
 
+// 用于标记该页面是否已完成onLoad
+var loadSuccessfully=false;
+
+
 /**
  * 处理info这个JSON数组的函数
  */
@@ -179,16 +183,36 @@ Page({
       title: '加载中',
     })
     var thatT=this;
-    requestMessage(this);
-    wx.getLocation({
-      success: function(res) {
-        // 请求站点列表，同时回调请求卡片列表
-        requestStationList(thatT, res.latitude, res.longitude, requestInfo);
-      },fail:function(res){
-        // 请求站点列表，同时回调请求卡片列表
-        requestStationList(thatT, 0, 0, requestInfo);
+    if (app.globalData.requestHeader.school_id && app.globalData.requestHeader.school_id != 0) {
+      requestMessage(this);
+      wx.getLocation({
+        success: function (res) {
+          // 请求站点列表，同时回调请求卡片列表
+          requestStationList(thatT, res.latitude, res.longitude, requestInfo);
+        }, fail: function (res) {
+          // 请求站点列表，同时回调请求卡片列表
+          requestStationList(thatT, 0, 0, requestInfo);
+        }
+      })
+    } else {
+      getApp().userInfoCallback = openID => {
+        if (app.globalData.requestHeader.school_id != 0) {
+          requestMessage(this);   
+          wx.getLocation({
+            success: function (res) {
+              // 请求站点列表，同时回调请求卡片列表
+              requestStationList(thatT, res.latitude, res.longitude, requestInfo);
+            }, fail: function (res) {
+              // 请求站点列表，同时回调请求卡片列表
+              requestStationList(thatT, 0, 0, requestInfo);
+            }
+          }) 
+        }
+        loadSuccessfully=true;
       }
-    })
+    }
+    //requestMessage(this);
+
     
     wx.setNavigationBarColor({
       frontColor: '#ffffff',
@@ -210,6 +234,41 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    if(loadSuccessfully==true&&getApp().globalData.requestHeader.school_id==0){
+      wx.hideLoading()
+      wx.showModal({
+        title: '即将跳转登录页面……',
+        content: '第一次使用微校需登录，点击下方跳转喏~',
+        confirmText:'跳转登录',
+        showCancel:false,
+        confirmColor:'#3399ff',
+        success(res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '../../login/login',
+            })
+          }
+        }
+
+      })
+    } else if (message.length==0 && getApp().globalData.requestHeader.school_id != 0){
+      // 当用户未注册时，注册后首先进入该段，完成onLoad没做的操作
+      console.log("THIS IS THE FIRST SHOW FUNCTION AFTER REGISTER")
+      var thatT=this;
+      requestMessage(this);
+      wx.getLocation({
+        success: function (res) {
+          // 请求站点列表，同时回调请求卡片列表
+          requestStationList(thatT, res.latitude, res.longitude, requestInfo);
+        }, fail: function (res) {
+          // 请求站点列表，同时回调请求卡片列表
+          requestStationList(thatT, 0, 0, requestInfo);
+        }
+      })
+    }
+
+
+
     wx.setNavigationBarColor({
       frontColor: '#ffffff',
       backgroundColor: '#3399ff',
@@ -245,6 +304,7 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
+    
     // 计数器用于控制第一次不请求onShow中获取卡片的函数
     requestInfo(this, deptStationID, year, month, day, hour, minute);
   },
@@ -352,7 +412,7 @@ Page({
       })
     }else if(e.detail.index==3){
       wx.navigateTo({
-        url: '../../login/login',
+        url: '../../personalCenter/personalCenter',
       })
     }
   },

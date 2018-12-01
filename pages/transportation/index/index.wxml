@@ -1,7 +1,7 @@
 <!--pages/transportation/index.wxml-->
 <wux-backdrop id="wux-backdrop" />
 
-<wux-floating-button position="bottomRight" theme="positive" buttons="{{ buttons }}" bind:change="onChange" bind:click="onClick" backdrop='true' />
+<wux-floating-button position="bottomRight" theme="positive" buttons="{{ buttons }}" bind:change="onChange" bind:click="onClick" backdrop='false' />
 
 <view class='header'>
   <picker class='dept' bindchange='stationList' value='{{stationList}}' range='{{stationList}}' mode='selector' range-key='label' >

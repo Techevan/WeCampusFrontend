@@ -143,7 +143,6 @@ Page({
    */
   bindSaveNickName:function(){
     savedUserInfo.nickName=userInfo.nickName
-    console.log(userInfo)
     var that=this;
     this.setData({
       animation2_1_1: false,
@@ -189,70 +188,6 @@ Page({
       })
     }, 500)
   },
-  /**
-   * 绑定编辑昵称
-   
-  bindEditNickName:function(){
-    var that = this;
-    const alert = (content) => {
-      $wuxDialog('#wux-dialog--alert').alert({
-        resetOnClose: true,
-        title: '提示',
-        content: content,
-      })
-    }
-  
-    $wuxDialog().prompt({
-      resetOnClose: true,
-      title: '设置昵称',
-      content: '你希望我怎么称呼你呢？',
-      fieldtype: 'text',
-      defaultText: '',
-      placeholder: '请输入新昵称（不多于8字）',
-      maxlength: 8,
-      cancelText:'放弃',
-      onConfirm(e, response) {        
-        if(response.length===0){
-          alert('诶？你貌似没有填写昵称诶……');
-          return;
-        }else{
-          savedUserInfo.nickName = response;
-          console.log(savedUserInfo)
-          that.setData({
-            animation2_1_1: false,
-            animation2_1_2: false,
-            animation2_1_3: false,
-            animation2_1_4: false,
-            animation2_1_5: false,
-            nickName:response,
-            avatarUrl: userInfo.avatarUrl
-          })
-          setTimeout(function () {
-            that.setData({
-              animation2_2_1: true,
-            })
-          }, 500)
-          setTimeout(function () {
-            that.setData({
-              animation2_2_2: true,
-            })
-          }, 1000)
-          setTimeout(function () {
-            that.setData({
-              animation2_2_3: true,
-            })
-          }, 1500)
-          setTimeout(function () {
-            that.setData({
-              animation2_2_4: true,
-            })
-          }, 2000)
-        }
-      },
-    })
-    
-  },
-  */
 
   /**
    * 绑定保存头像
@@ -262,20 +197,27 @@ Page({
     var that = this;
     wx.getLocation({
       success: function(res) {
-        console.log(res)
-        /*
         wx.request({
-          url: '',
+          url: app.globalData.domain +'api/get_nearest_school.php',
           data:{
+            open_id:app.globalData.openID,
             latitude:res.latitude,
             longitude:res.longitude,
           },
           success:function(res){
-            userInfo.universityLabel=res.label;
-            userInfo.universityValue=res.value;
+            userInfo.universityLabel=res.data.school_name;
+            userInfo.universityValue=res.data.school_id;
             that.setData({
-              universityLabel:res.label
-              universityLogo:res.logo
+              universityLabel:res.data.school_name,
+              universityLogo: app.globalData.domain+'data/school_logo/'+res.data.school_logo,
+              animation2_2_1: false,
+              animation2_2_2: false,
+              animation2_2_3: false,
+              animation2_2_4: false,
+              animation2_2_5: false,
+              animation2_2_6: false,
+              animation2_2_7: false,
+              animation2_2_8: false,
             })
             setTimeout(function () {
               that.setData({
@@ -302,41 +244,6 @@ Page({
             // 网络请求失败应该作何反应呢？
           }
         })
-        */
-        // 等待补充接口后修改
-
-        that.setData({
-          universityLabel:'北京大学',
-          universityLogo: '/lib/icon/pku.png',
-          animation2_2_1: false,
-          animation2_2_2: false,
-          animation2_2_3: false,
-          animation2_2_4: false,
-          animation2_2_5: false,
-          animation2_2_6: false,
-          animation2_2_7: false,
-          animation2_2_8: false,
-        })
-        setTimeout(function () {
-          that.setData({
-            animation2_3_1: true,
-          })
-        }, 500)
-        setTimeout(function () {
-          that.setData({
-            animation2_3_2: true,
-          })
-        }, 1000)
-        setTimeout(function () {
-          that.setData({
-            animation2_3_3: true,
-          })
-        }, 1500)
-        setTimeout(function () {
-          that.setData({
-            animation2_3_4: true,
-          })
-        }, 2000)
       },
       fail:function(){
         that.setData({
@@ -407,76 +314,93 @@ Page({
    */
   bindSaveUniversity:function(){
     var that=this;
+    
     savedUserInfo.universityValue=userInfo.universityValue;
-    this.setData({
-      animation2_3_1: false,
-      animation2_3_2: false,
-      animation2_3_3: false,
-      animation2_3_4: false,
-      animation2_3_5: false,
-      animation2_3_6: false,
-      animation2_3_7: false,
-      animation2_3_8: false,
-      animation2_3_9: false,
-      currentStep: 2,
+    wx.request({
+      url: app.globalData.domain+'api/register.php',
+      method:'POST',
+      header: app.globalData.requestHeader,
+      data:{
+        open_id:app.globalData.openID,
+        school_id:savedUserInfo.universityValue,
+        nickname:savedUserInfo.nickName,
+        avatar:savedUserInfo.avatarUrl,
+      },
+      success:function(res){
+        app.globalData.requestHeader.school_id=savedUserInfo.universityValue;
+        that.setData({
+          animation2_3_1: false,
+          animation2_3_2: false,
+          animation2_3_3: false,
+          animation2_3_4: false,
+          animation2_3_5: false,
+          animation2_3_6: false,
+          animation2_3_7: false,
+          animation2_3_8: false,
+          animation2_3_9: false,
+          currentStep: 2,
+        })
+        setTimeout(function () {
+          that.setData({
+            animation3_1_1: true,
+          })
+        }, 500)
+        setTimeout(function () {
+          that.setData({
+            animation3_1_2: true,
+          })
+        }, 1000)
+        setTimeout(function () {
+          that.setData({
+            animation3_1_3: true,
+          })
+        }, 1500)
+        setTimeout(function () {
+          that.setData({
+            animation3_1_4: true,
+          })
+        }, 2000)
+      }
     })
-    setTimeout(function () {
-      that.setData({
-        animation3_1_1: true,
-      })
-    }, 500)
-    setTimeout(function () {
-      that.setData({
-        animation3_1_2: true,
-      })
-    }, 1000)
-    setTimeout(function () {
-      that.setData({
-        animation3_1_3: true,
-      })
-    }, 1500)
-    setTimeout(function () {
-      that.setData({
-        animation3_1_4: true,
-      })
-    }, 2000)
+
   },
   
   /**
    * 绑定编辑大学
    */
   bindEditUniversity:function(){
-    var universityList = [{ 'title':'北京大学', 'value':1 }, { 'title':'清华大学', 'value':2 }, { 'title':'上海交通大学', 'value':3 }, { 'title':'复旦大学', 'value':4 }]
-    /*
+    var that = this;
+    var universityList = [];
     wx.request({
-      url: 'http://www.we-campus.cn/WeCampus/api/get_school_list.php',
+      url: app.globalData.domain+'api/get_school_list.php',
+      data:{
+        open_id:app.globalData.openID
+      },
       header:app.globalData.requestHeader,
       success(res){
-        console.log(res)
-        var tempData = JSON.parse(res.data)
+        var tempData = res.data;
         for (let i = 0; i < tempData.length;i++){
-          universityList.push({ 'title': tempData[i].school_name, 'value': tempData[i].school_id});
+          universityList.push({ title: tempData[i].school_name, value: tempData[i].school_id});
         }
+        that.setData({
+          animation2_3_1: false,
+          animation2_3_2: false,
+          animation2_3_3: false,
+          animation2_3_4: false,
+          animation2_3_5: false,
+          animation2_3_6: false,
+          animation2_3_7: false,
+          animation2_3_8: false,
+          universityList: universityList
+        })
+        setTimeout(function () {
+          that.setData({
+            animation2_3_9: true,
+          })
+        }, 500)
       }
     })
-    */
-    var that=this;
-    this.setData({
-      animation2_3_1: false,
-      animation2_3_2: false,
-      animation2_3_3: false,
-      animation2_3_4: false,
-      animation2_3_5: false,
-      animation2_3_6: false,
-      animation2_3_7: false,
-      animation2_3_8: false,
-      universityList:universityList
-    })
-    setTimeout(function () {
-      that.setData({
-        animation2_3_9: true,
-      })
-    }, 500)
+
   },
   
   /**
@@ -590,10 +514,7 @@ Page({
    * 绑定完成
    */
   bindFinish:function(){
-    console.log(savedUserInfo)
-    wx.navigateBack({
-      
-    })
+    wx.navigateBack({})
   },
 
   /**
@@ -641,14 +562,17 @@ Page({
           header: app.globalData.requestHeader,
           success: function (res) {
             var tempData = JSON.parse(res.data)
-            var imgURL = 'https://www.we-campus.cn/WeCampus/data/cache/'+tempData.temp_url;
-            console.log(imgURL)
+            var imgURL = tempData.temp_url;
             that.setData({
               avatarSpin:false,
-              avatarTemp:imgURL
+              avatarTemp: 'https://www.we-campus.cn/WeCampus/data/cache/' +imgURL
             })
-            userInfo.avatarUrl = imgURL;//这边还要加入一些逻辑进去
-            console.error(userInfo)
+            userInfo.avatarUrl = imgURL;
+            /**
+             * 目前，用户上传的头像以单文件名方式保存，
+             * 微信头像以URL方式保存，
+             * 最终提交request存数据库时需对该部分进行处理
+             */
           }
         })
       }
@@ -660,7 +584,6 @@ Page({
    * 绑定学校选择列表
    */
   bindUniversitySelector:function(e){
-    console.error(e.detail);
     userInfo.universityValue = e.detail.value;
     this.setData({
       universitySelectorValue: e.detail.value

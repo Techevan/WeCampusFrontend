@@ -1,4 +1,6 @@
 // pages/personalCenter/personalCenter.js
+var app = getApp();
+var userInfo={};
 Page({
 
   /**
@@ -26,12 +28,27 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var that=this;
     wx.setNavigationBarColor({
       frontColor: '#000000',
       backgroundColor: '#ffffff',
     })
     wx.setNavigationBarTitle({
       title: '我的微校',
+    })
+    wx.request({
+      url: app.globalData.domain+'api/get_user_info.php',
+      data:{
+        open_id:app.globalData.openID
+      },
+      success:function(res){
+        console.log(res)
+        userInfo=res.data;
+        userInfo.avatar ='https://www.we-campus.cn/WeCampus/data/avatar/'+userInfo.avatar
+        that.setData({
+          userInfo:userInfo
+        })
+      }
     })
   },
 
